@@ -1,0 +1,40 @@
+{
+  "name": "speakeasy",
+  "version": "1.0.0",
+  "description": "an open source penpal application with auto-translation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ptrompeter/SpeakEasy.git"
+  },
+  "keywords": [
+    "translation",
+    "server",
+    "database",
+    "persistence",
+    "penpal",
+    "email",
+    "message",
+    "login",
+    "authentication"
+  ],
+  "author": "Patrick Trompeter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ptrompeter/SpeakEasy/issues"
+  },
+  "homepage": "https://github.com/ptrompeter/SpeakEasy#readme",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "express-ejs-layouts": "^2.0.0",
+    "pg": "^4.4.3",
+    "pg-hstore": "^2.3.2",
+    "request": "^2.67.0",
+    "sequelize": "^3.18.0"
+  }
+}
