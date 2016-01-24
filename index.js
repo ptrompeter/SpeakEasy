@@ -16,10 +16,16 @@ app.use(express.static(__dirname + '/public'));
 // Routes
 
 app.get('/', function(req,res){
-  res.send('Hello World!');
+  res.render('home');
 });
+
+app.get('/about', function(req,res){
+  res.render('about');
+})
 
 // Controllers
 
+
+//App Listen
 
 app.listen(process.env.PORT || 3000);
