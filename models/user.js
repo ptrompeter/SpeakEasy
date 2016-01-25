@@ -11,15 +11,15 @@ module.exports = function(sequelize, DataTypes) {
     palRecipient: DataTypes.BOOLEAN,
     lastLogin: DataTypes.DATE,
     password: DataTypes.STRING,
-    lastReuest: DataTypes.DATE,
+    lastRequest: DataTypes.DATE,
     matchWaiting: DataTypes.BOOLEAN,
     email: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
         models.user.belongsToMany(models.message, {through: 'usersMessages'});
-        models.user.hasMany(models.user, {as: 'pals'});
-        // associations can be defined here
+        models.user.belongsToMany(models.user, {as: 'pals', through: 'usersPals'});
+        // associations defined above
       }
     }
   });

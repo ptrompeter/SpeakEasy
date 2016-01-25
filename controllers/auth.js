@@ -10,23 +10,30 @@ router.get('/signup', function(req,res){
 
 router.post('/signup', function(req,res){
  db.user.create({
-   userName: 'testing2',
-   firstName: 'testing2',
-   lastName: 'testing2',
-   language: 'testing2',
-   nationality: 'testing2',
-   gender: 1,
-   birthday: null,
-   palRecipient: false,
-   lastLogin: null,
-   password: 'testing2',
-   lastRequest: null,
-   matchWaiting: false,
-   email: 'testing2'
+   userName: req.body.username,
+   password: req.body.password,
+   language: req.body.language
  }).then(function(user){
    res.send(user);
  })
 });
+// Go to Login Page
+router.get('/login', function(req,res){
+  res.render('users/login');
+});
+
+// Logging In - creating session
+router.post('/login', function(req,res){
+  // Post Login
+  res.send('this will login.')
+});
+
+// Log out
+router.post('/logout', function(req,res){
+  // Post Login
+  res.send('this will logout.')
+});
+
 // Export
 
 module.exports = router;
