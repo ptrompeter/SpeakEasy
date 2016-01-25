@@ -15,6 +15,18 @@ module.exports = {
       translation: {
         type: Sequelize.TEXT
       },
+      userId: {
+        type: Sequelize.INTEGER
+      },
+      palId: {
+        type: Sequelize.INTEGER
+      },
+      userName:{
+        type: Sequelize.STRING
+      },
+      palName:{
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
