@@ -24,14 +24,25 @@ router.get('/login', function(req,res){
 
 // Logging In - creating session
 router.post('/login', function(req,res){
-  // Post Login
-  res.send('this will login.')
+  passport.authenticate('local', function(error,user,info){
+    if(user){
+      req.login(user,function(error){
+        if(error) throw error;
+        req.flash('Sucess', 'You are now logged in.');
+        res.redirect('/')
+      });
+    } else {
+      req.flash('Error', 'Sorry, please try again.');
+      res.redirect('/auth/login');
+    }
+  })(req,res);
 });
 
 // Log out
 router.post('/logout', function(req,res){
-  // Post Login
-  res.send('this will logout.')
+  req.logout();
+  req.flash('Info', 'You have been logged out.');
+  res.redirect('/');
 });
 
 // Export
