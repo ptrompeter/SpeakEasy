@@ -32,7 +32,7 @@ passport.serializeUser(function(user, done){
 
 //Deserialize user
 passport.deserializeUser(function(id, done){
-  db.user.find(id).then(function(user){
+  db.user.findById(id).then(function(user){
     done(null, user.get());
   }).catch(done);
 });
@@ -56,6 +56,25 @@ passport.use(new localStrategy(
    });
  }
 ));
+
+//Set User for session
+app.use(function(req,res,next){
+  if(req.session.user){
+    db.user.findById(req.session.user).then(function(user){
+      req.currentUser = user;
+      next();
+    });
+  } else {
+    req.currentUser = false;
+    next();
+  }
+});
+
+app.use(function(req,res,next){
+  app.locals.currentUser = req.user;
+  app.locals.alerts = req.flash();
+  next();
+});
 
 // Routes
 

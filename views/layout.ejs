@@ -8,16 +8,23 @@
   </head>
   <body>
     <ul>
-      <li>
-        <a href='/'>home</a>
-      </li>
-      <li>
-        <a href='/about'>about</a>
-      </li>
-      <li>
-        <a href='/newuser'>create account</a>
-      </li>
+      <li><a href='/'>home</a></li>
+      <li><a href='/about'>about</a></li>
+      <% if (currentUser) { %>
+       <li> Hello, <%= currentUser.userName %></li>
+       <li><a href="/auth/logout">Logout</a></li>
+      <% } else { %>
+      <li><a href='/auth/signup'>create account</a></li>
+      <li><a href='/auth/login'>login</a></li>
+      <% }%>
     </ul>
+    <% if(typeof alerts !== 'undefined'){ %>
+      <% for(key in alerts){ %>
+          <% alerts[key].forEach(function(thisMsg){ %>
+              <div class="alert alert-<%= key %>"><%= thisMsg %></div>
+        <% }); %>
+      <% } %>
+     <% } %>
     <%- body %>
   </body>
 </html>
