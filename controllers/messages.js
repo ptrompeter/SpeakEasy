@@ -7,27 +7,44 @@ var router = express.Router();
 //Directs to message form
 router.get('/new', function(req,res){
   res.render('messages/new.ejs')
-})
-//Sending form data to DB
-router.post('/new', function(req,res){
-  db.message.create({
-    body: req.body.text,
-    translate: 'LATER'
-  }).then(function(message){
-    db.user.findById(1).then(function(sender){
-      // above: change to logged in user's ID when auth is working.
-      sender.addMessage(message).then(function(sendmessage){
-        db.user.findById(2).then(function(pal){
-          //above: change to recipient ID.
-          pal.addMessage(message).then(function(getmessage){
-            res.send(sendmessage, getmessage);
-            //above: change to a res.redirect when the view is up.
-          });
-        });
-      });
-    });
-  });
 });
+
+//Sending form data to DB
+
+// Send New Message Route
+
+router.post('/new', function (req,res){
+ db.user.find({where: {userName: req.body.pal}}).then(function(pal){
+   db.message.create({
+     body: req.body.text,
+     translation: 'LATER - When API call is working.',
+     userId: req.user.id,
+     palId: pal.id,
+     userName: req.user.userName,
+     palName: pal.userName
+   }).then(function(message){
+     res.send(message);
+   });
+ });
+});
+
+
+// Get current user's sent messages
+router.get('/sent', function(req,res){
+ db.message.findAll({ where: {userId: req.user.id}}).then(function(messages){
+   res.render('messages/sent.ejs', {messages: messages});
+  //  res.send(messages);
+ });
+});
+
+
+// Get current user's received messages
+router.get('/received', function(req,res){
+ db.message.findAll({ where: {palId: req.user.id}}).then(function(messages){
+   res.render('messages/received.ejs', {messages: messages});
+ });
+});
+
 // Export
 
 module.exports = router;

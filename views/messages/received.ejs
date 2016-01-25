@@ -1,0 +1,8 @@
+<% messages.forEach(function(message) { %>
+ <div class="well">
+   <p><strong>To:</strong><%= message.palName %></p>
+   <p><strong>From:</strong><%= message.userName %></p>
+   <p><strong>Orginal Body:</strong><%= message.body %></p>
+   <p><strong>Translation:</strong><%= message.translation %></p>
+ </div>
+<% }); %>
