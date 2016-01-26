@@ -3,7 +3,6 @@ body {
   text-align: center;
 }
 
-
 nav {
     list-style-type: none;
     background: blue;
@@ -19,9 +18,13 @@ a {
   text-decoration: none;
 }
 
+
+
 footer {
   margin: 10px 0;
 }
+
+
 
 
 /*////////////////HOME/////////*/
@@ -30,4 +33,20 @@ footer {
   height: 500px;
   max-width:  100%;
   background-color: gray;
+  padding: 15px 0 0 0;
+}
+
+#home h1 {
+  font-size: 5em;
+}
+
+/*////////////////Misc/////////*/
+
+.center {
+  text-align: center;
+}
+
+.text {
+  text-align: left;
+  margin: 5%;
 }
