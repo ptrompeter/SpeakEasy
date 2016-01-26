@@ -86,6 +86,9 @@ app.get('/about', function(req,res){
   res.render('about');
 });
 
+app.get('/users', function(req, res){
+  res.render('users');
+});
 
 
 // Controllers
