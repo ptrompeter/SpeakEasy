@@ -25,23 +25,26 @@ router.get('/new', function(req,res){
 
 
 router.post('/new', function (req,res){
-
+  //doing two db.user.find so we can access user language and pal language
+db.user.find({where: {userName: req.body.pal}}).then(function(pal) {
 //Variables for googleapis//
   var apiKey = 'key=AIzaSyCCq7pSGvCgu5tcDJezGo82QIBe7R8hCX8&';
-  var from = 'en'; //source of language//
-  var to = 'ar'; //transating language//
+  var from = req.user.language; //source of language//
+  var to = pal.language; //transating language//
   var url = 'https://www.googleapis.com/language/translate/v2?q=';
   var input = req.body.text; // grab text from new msg post and use it in query for api//
   var translations;
 //api http request to googleapi//
  request(url+input+'&source='+from+'&target='+to+'&'+apiKey, function (error, response, body) {
+   console.log("4 user: "+req.user.language+" pal: "+pal.language);
      if (!error && response.statusCode == 200) {
          var data =JSON.parse(body);
          translations = data.data.translations[0].translatedText;
 
      }
  }).on('response', function(response) {
-     db.user.find({where: {userName: req.body.pal}}).then(function(pal){
+
+db.user.find({where: {userName: req.body.pal}}).then(function(pal){
        db.message.create({
          body: req.body.text,
          translation: translations,
@@ -53,9 +56,9 @@ router.post('/new', function (req,res){
 
          res.send(message);
        });
-     });
+      });
    });
-
+  });
 });
 
 
