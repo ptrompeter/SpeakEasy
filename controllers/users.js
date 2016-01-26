@@ -17,20 +17,20 @@ var router = express.Router();
 router.get('/pals', function(req, res){
   db.user.findAll({ where: {palRecipient: true}})
   .then(function(users){
-    res.render('users/pals.ejs', {users: users});
+    res.render('users.ejs', {users: users});
   });
 });
 
 router.post('/pals', function(req, res){
   if (req.body.palbutton==='NO'){
-    res.render('users/cancel.ejs');
+    res.render('users.ejs', {result: req.body.palbutton, users: ''});
   } else {
     db.user.find({where: {userName: req.body.pal}}).then(function(pal){
       db.user.update(
         {matchWaiting: true},
         {where: {userName: pal.userName}}
       ).then(function(user){
-        res.render('users/pending.ejs');
+        res.render('users.ejs', {result: req.body.palbutton, users: ''});
       });
     });
   }

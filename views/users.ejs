@@ -1,1 +1,32 @@
 <h1>Users page</h1>
+<div class="myPals">
+  <p>You have no pals!</p>
+</div>
+<div class="filterPals">
+  <% if (typeof users !== 'undefined') { %>
+    <% if (typeof result === 'undefined') { %>
+      <% var randNum = Math.floor(Math.random()*users.length); %>
+      <% users.forEach(function(user, index) { %>
+        <% if (index === randNum) { %>
+           <p><strong>We have found a potential pal!</strong><br />
+             <h3><%= user.userName %></h3>
+           Would you like to add <%= user.userName %>?</p>
+           <form action='/users/pals' method='POST'>
+             <input type='hidden' name='pal' value='<%= user.userName %>'>
+             <button type='submit' name='palbutton' value='YES'>Yes</button> <button type='submit' name='palbutton' value='NO'>No</button>
+           </form>
+        <% } %>
+      <% }); %>
+    <% } else if (result === 'YES') { %>
+      <p>Your friend request has been sent!</p>
+    <% } else if (result === 'NO') { %>
+      <p>We're sorry you did not like the suggested Pal!</p>
+    <% } %>
+  <% } else { %>
+    You haven't found a new pal for today!<br />
+    Would you like to find a new pal?<br />
+    <form action='/users/pals' method='GET'>
+      <button type="submit">Find a Pal!</button>
+    </form>
+  <% } %>
+</div>

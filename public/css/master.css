@@ -40,6 +40,26 @@ footer {
   font-size: 5em;
 }
 
+/*////////////////USERS/////////*/
+
+.myPals {
+  width: 63%;
+  display: inline-block;
+}
+
+.filterPals {
+  border: 1px solid #bbb;
+  background-color: #bbb;
+  padding: 0.4em;
+  width: 33%;
+  display: inline-block;
+  border-radius: 10px;
+}
+
+.filterPals button {
+  box-shadow: 1px 1px 5px;
+}
+
 /*////////////////Misc/////////*/
 
 .center {

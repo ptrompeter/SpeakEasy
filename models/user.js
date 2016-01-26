@@ -23,6 +23,7 @@ module.exports = function(sequelize, DataTypes) {
    },
    lastRequest: DataTypes.DATE,
    matchWaiting: DataTypes.BOOLEAN,
+   sentBy: DataTypes.STRING,
    email: DataTypes.STRING
  }, {
    classMethods: {
