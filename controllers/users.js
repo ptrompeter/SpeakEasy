@@ -17,24 +17,55 @@ var router = express.Router();
 router.get('/pals', function(req, res){
   db.user.findAll({ where: {palRecipient: true}})
   .then(function(users){
-    res.render('users.ejs', {users: users});
+    res.render('users.ejs', {potentialpal: users});
   });
 });
 
 router.post('/pals', function(req, res){
   if (req.body.palbutton==='NO'){
-    res.render('users.ejs', {result: req.body.palbutton, users: ''});
+    res.render('users.ejs', {sendORcanc: req.body.palbutton, potentialpal: ''});
   } else {
-    db.user.find({where: {userName: req.body.pal}}).then(function(pal){
-      db.user.update(
-        {matchWaiting: true},
-        {where: {userName: pal.userName}}
-      ).then(function(user){
-        res.render('users.ejs', {result: req.body.palbutton, users: ''});
-      });
+    db.user.update({
+      matchWaiting: true,
+      sentBy: req.user.userName},
+      {where: {userName: req.body.pal}}
+    ).then(function(user){
+      res.render('users.ejs', {sendORcanc: req.body.palbutton, potentialpal: ''});
     });
   }
 });
+
+router.post('/addpal', function(req, res){
+  db.user.update(
+    {matchWaiting: false},
+    {where: {userName: req.user.userName}}
+  ).then(function(value){
+    if (req.body.palbutton==='NO'){
+      res.render('users.ejs', {pending: req.user.matchWaiting, accORrej: req.body.palbutton});
+    } else {
+      db.user.find({where: {userName: req.user.sentBy}}).then(function(pal){
+        db.usersPals.create({
+          userId: req.user.id,
+          palId: pal.id
+        }).then(function(value){
+          db.usersPals.create({
+            userId: pal.id,
+            palId: req.user.id
+          }).then(function(pal){
+            console.log(req.user.matchWaiting)
+            res.render('users.ejs', {pending: req.user.matchWaiting, accORrej: req.body.palbutton});
+          });
+        });
+      });
+    }
+  });
+});
+
+
+
+
+
+
 
 // Export
 

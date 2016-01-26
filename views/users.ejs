@@ -1,25 +1,25 @@
 <h1>Users page</h1>
 <div class="myPals">
-  <p>You have no pals!</p>
+  <p>You have no pals</p>
 </div>
 <div class="filterPals">
-  <% if (typeof users !== 'undefined') { %>
-    <% if (typeof result === 'undefined') { %>
-      <% var randNum = Math.floor(Math.random()*users.length); %>
-      <% users.forEach(function(user, index) { %>
+  <% if (typeof potentialpal !== 'undefined') { %>
+    <% if (typeof sendORcanc === 'undefined') { %>
+      <% var randNum = Math.floor(Math.random()*potentialpal.length); %>
+      <% potentialpal.forEach(function(user, index) { %>
         <% if (index === randNum) { %>
            <p><strong>We have found a potential pal!</strong><br />
              <h3><%= user.userName %></h3>
            Would you like to add <%= user.userName %>?</p>
            <form action='/users/pals' method='POST'>
              <input type='hidden' name='pal' value='<%= user.userName %>'>
-             <button type='submit' name='palbutton' value='YES'>Yes</button> <button type='submit' name='palbutton' value='NO'>No</button>
+             <button type='submit' name='palbutton' value='YES'>Send</button> <button type='submit' name='palbutton' value='NO'>Cancel</button>
            </form>
         <% } %>
       <% }); %>
-    <% } else if (result === 'YES') { %>
+    <% } else if (sendORcanc === 'YES') { %>
       <p>Your friend request has been sent!</p>
-    <% } else if (result === 'NO') { %>
+    <% } else if (sendORcanc === 'NO') { %>
       <p>We're sorry you did not like the suggested Pal!</p>
     <% } %>
   <% } else { %>
@@ -28,5 +28,21 @@
     <form action='/users/pals' method='GET'>
       <button type="submit">Find a Pal!</button>
     </form>
+  <% } %>
+  <hr />
+  <% if (typeof pending !== 'undefined' && typeof newPal !=='undefined') { %>
+    <p><%= newPal[0].userName %> wanted you as their pal!<br />Would you like to become their pal?</p>
+    <form action='/users/addpal' method='POST'>
+      <input type='hidden' name='pal' value=''>
+      <button type='submit' name='palbutton' value='YES'>Send</button> <button type='submit' name='palbutton' value='NO'>Cancel</button>
+    </form>
+    <% } else { %>
+      <% if (typeof accORrej === 'undefined') { %>
+        <p>You currently have no pending Pal requests.</p>
+      <% } else if (accORrej === 'YES') { %>
+          <p>You've accepted [username] as a new pal!</p>
+      <% } else if (accORrej === 'NO') { %>
+          <p>You've declined [username]'s request.</p>
+      <% } %>
   <% } %>
 </div>
