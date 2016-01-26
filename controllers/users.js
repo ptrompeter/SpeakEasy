@@ -21,6 +21,21 @@ router.get('/pals', function(req, res){
   });
 });
 
+router.post('/pals', function(req, res){
+  if (req.body.palbutton==='NO'){
+    res.render('users/cancel.ejs');
+  } else {
+    db.user.find({where: {userName: req.body.pal}}).then(function(pal){
+      db.user.update(
+        {matchWaiting: true},
+        {where: {userName: pal.userName}}
+      ).then(function(user){
+        res.render('users/pending.ejs');
+      });
+    });
+  }
+});
+
 // Export
 
 module.exports = router;

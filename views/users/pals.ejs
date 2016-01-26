@@ -1,11 +1,15 @@
-<h1>PAAAAAALLLLZZZ PAGE</h1>
+<h1>Pals Page</h1>
 <% var randNum = Math.floor(Math.random()*users.length); %>
 <% users.forEach(function(user, index) { %>
   <% if (index === randNum) { %>
-   <div class="temp user info">
+   <div class='palFinder'>
      <p><strong>We have found a potential pal!</strong><br />
        <h2><%= user.userName %></h2><br />
      Would you like to add <%= user.userName %>?</p>
+     <form action='/users/pals' method='POST'>
+       <input type='hidden' name='pal' value='<%= user.userName %>'>
+       <button type='submit' name='palbutton' value='YES'>Yes</button> <button type='submit' name='palbutton' value='NO'>No</button>
+     </form>
    </div>
   <% } %>
 <% }); %>
