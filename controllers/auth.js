@@ -20,7 +20,8 @@ router.post('/signup',function(req,res){
      },
      defaults:{
        password: req.body.password,
-       language: req.body.language
+       language: req.body.language,
+       palRecipient: req.body.palRecipient
      }
    }).spread(function(user,created){
      if(created){
