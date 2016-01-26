@@ -41,7 +41,7 @@ router.get('/sent', function(req,res){
 // Get current user's received messages
 router.get('/received', function(req,res){
  db.message.findAll({ where: {palId: req.user.id}}).then(function(messages){
-   res.render('messages/received.ejs', {messages: messages});
+   res.render('messages/received.ejs', {currentUser: res});
  });
 });
 
