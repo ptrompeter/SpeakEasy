@@ -21,7 +21,8 @@ router.post('/signup',function(req,res){
      defaults:{
        password: req.body.password,
        language: req.body.language,
-       palRecipient: req.body.palRecipient
+       palRecipient: req.body.palRecipient,
+       matchWaiting: false
      }
    }).spread(function(user,created){
      if(created){
