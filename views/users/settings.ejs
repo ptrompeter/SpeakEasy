@@ -1,0 +1,32 @@
+<section id='settings'>
+  <h4>Adding additional information about yourself is optional, but it improves the likelihood that you'll be selected as someone's new pal</h4>
+  <form id='userinfo' action="/users/settings" method="POST" role="form">
+    <div>
+
+    </div>
+    <div>
+      First name: <input type='text' id='firstname' class='form-control' name='firstname' value="<%= currentUser.firstName%>"/>
+    </div>
+    <div>
+      Last name: <input type='text' id='lastname' class='form-control' name='lastname' value="<%= currentUser.lastName%>"/>
+    </div>
+    <div>
+      Language: <input type='text' id='language' class='form-control' name='language' value="<%= currentUser.language%>"/>
+    </div>
+    <div>
+      Nationality: <input type='text' id='nationality' class='form-control' name='nationality' value="<%= currentUser.nationality%>"/>
+    </div>
+    <div>
+      Gender: <input type='text' id='gender' class='form-control' name='gender' value="<%= currentUser.gender%>"/>
+    </div>
+    <div>
+      Birthday: <input type='text' id='birthday' class='form-control' name='birthday' value="<%= currentUser.birthday%>"/>
+    </div>
+    <div>
+      Are you available to be someone's new pal? <input type='text' id='newpal' class='form-control' name='newpal' value="<%= currentUser.palRecipient%>"/>
+    </div>
+    <div>
+      <button type='submit'>Submit!</button>
+    </div>
+  </form>
+</section>

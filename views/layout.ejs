@@ -13,6 +13,7 @@
       <li><a href='/'>HOME</a></li>
       <li><a href='/about'>ABOUT</a></li>
       <% if (currentUser) { %>
+        <li><a href='/users'>users page</a></li>
        <li> Hello, <%= currentUser.userName %></li>
        <li><a href="/auth/logout">LOGOUT</a></li>
       <% } else { %>

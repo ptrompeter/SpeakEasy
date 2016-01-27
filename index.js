@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 
 //.uses for authentication
-app.use(session({ secret: 'Manymanyallthes3kr3tz', resave: false, saveUninitialized: true}));
+app.use(session({ secret: 'M4nym4ny411the53kr3tZ', resave: false, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -85,6 +85,18 @@ app.get('/', function(req,res){
 
 app.get('/about', function(req,res){
   res.render('about');
+});
+
+
+app.get('/users', function(req, res){
+  if (req.user.matchWaiting === true) {
+    db.user.findAll({ where: {userName: req.user.sentBy}})
+    .then(function(newPal){
+      res.render('users.ejs', {newPal: newPal, pending: req.user.matchWaiting})
+    });
+  } else {
+    res.render('users');
+  }
 });
 
 app.get('/chat', function(req, res) {
