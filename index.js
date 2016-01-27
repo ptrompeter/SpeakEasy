@@ -10,6 +10,7 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var localStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt');
+var socketIO = require('socket.io');
 
 // Middleware
 
@@ -86,10 +87,13 @@ app.get('/about', function(req,res){
   res.render('about');
 });
 
+app.get('/chat', function(req, res) {
+  res.render('chat');
+});
 
 
 // Controllers
-
+//app.use('/chat', require('./controllers/chat.js'))
 app.use('/auth', require('./controllers/auth.js'));
 app.use('/users', require('./controllers/users.js'));
 app.use('/messages', require('./controllers/messages.js'));

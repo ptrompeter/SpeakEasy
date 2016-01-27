@@ -14,7 +14,6 @@ var request = require('request');
 
 //Directs to message form
 router.get('/new', function(req,res){
-  console.log(res.b+' here 1');
   res.render('messages/new.ejs')
 });
 
@@ -28,9 +27,10 @@ router.post('/new', function (req,res){
   //doing two db.user.find so we can access user language and pal language
 db.user.find({where: {userName: req.body.pal}}).then(function(pal) {
 //Variables for googleapis//
-  var apiKey = 'key=AIzaSyCCq7pSGvCgu5tcDJezGo82QIBe7R8hCX8&';
+  var apiKey = 'key='+process.env.SPEAKEASY_KEY+'&';
+  console.log(apiKey);
   var from = req.user.language; //source of language//
-  var to = pal.language; //transating language//
+  var to = pal.language; //translating language//
   var url = 'https://www.googleapis.com/language/translate/v2?q=';
   var input = req.body.text; // grab text from new msg post and use it in query for api//
   var translations;
