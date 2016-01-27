@@ -18,7 +18,9 @@ a {
   text-decoration: none;
 }
 
-
+button {
+  box-shadow: 1px 1px 5px;
+}
 
 footer {
   margin: 10px 0;
@@ -56,9 +58,12 @@ footer {
   border-radius: 10px;
 }
 
-button {
-  box-shadow: 1px 1px 5px;
+.error {
+  color: #e00;
+  font-weight: bold;
+  margin: 5px;
 }
+
 
 /*////////////////Misc/////////*/
 

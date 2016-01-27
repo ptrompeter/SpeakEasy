@@ -4,20 +4,37 @@ var router = express.Router();
 
 // Routes
 
-// router.get('/addpal', function(req, res){
-//   db.user.findById(1).then(function(currentuser){
-//     db.user.findById(2).then(function(friend){
-//       currentuser.addPal(friend).then(function(palcreated){
-//         res.send(palcreated)
-//       })
-//     })
-//   })
-// })
-
 router.get('/pals', function(req, res){
-  db.user.findAll({ where: {palRecipient: true}})
-  .then(function(users){
-    res.render('users.ejs', {potentialpal: users});
+  var excl = [];
+  var incl = [];
+  db.usersPals.findAll({ where: {userId: req.user.id}}).then(function(pals){
+    db.user.findAll({ where: {palRecipient: true, matchWaiting: false, id: {ne: req.user.id}}}).then(function(users){
+      var palsArray = pals.map(function(Pele, Pindex, Parray){
+        var userArray = users.map(function(Aele, Aindex, Aarray){
+          if (Pele.palId !== Aele.id) {
+            if (typeof excl[0] === 'undefined') {
+              if (incl.indexOf(Aele) === -1){
+                incl.push(Aele);
+              }
+            }
+            var exclmap = excl.map(function(Eele, Eindex, Earray){
+              if (Eele !== Aele.id) {
+                if (incl.indexOf(Aele) === -1){
+                  incl.push(Aele);
+                }
+              }
+            });
+          } else {
+            excl.push(Aele.id);
+          }
+        });
+      });
+      if (incl.length===0){
+        res.render('users.ejs', {error: true});
+      } else {
+        res.render('users.ejs', {potentialpal: incl})
+      }
+    });
   });
 });
 
@@ -51,21 +68,14 @@ router.post('/addpal', function(req, res){
           db.usersPals.create({
             userId: pal.id,
             palId: req.user.id
-          }).then(function(pal){
-            console.log(req.user.matchWaiting)
-            res.render('users.ejs', {pending: req.user.matchWaiting, accORrej: req.body.palbutton});
+          }).then(function(value){
+            res.render('users.ejs', {pending: req.user.matchWaiting, accORrej: req.body.palbutton, palName: pal.userName});
           });
         });
       });
     }
   });
 });
-
-
-
-
-
-
 
 // Export
 
