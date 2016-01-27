@@ -1,6 +1,8 @@
 /*////////////////LAYOUT/////////*/
 body {
   text-align: center;
+  /*font-family: 'Pontano Sans', sans-serif;*/
+  font-family: 'Actor', sans-serif;
 }
 
 nav {
@@ -49,4 +51,10 @@ footer {
 .text {
   text-align: left;
   margin: 5%;
+}
+
+/*///////////////Messages//////////*/
+.message {
+  font-family: 'Rokkitt', serif;
+  font-size: 1rem;
 }
