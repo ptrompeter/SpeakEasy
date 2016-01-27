@@ -3,6 +3,7 @@ module.exports = function(sequelize, DataTypes) {
   var message = sequelize.define('message', {
     body: DataTypes.TEXT,
     translation: DataTypes.TEXT,
+    language: DataTypes.TEXT,
     userId: DataTypes.INTEGER,
     palId: DataTypes.INTEGER,
     userName: DataTypes.STRING,

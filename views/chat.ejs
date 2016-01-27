@@ -1,0 +1,26 @@
+<h1>Chat Room!</h1>
+<!-- Dropdown of chat topic -->
+<select>
+  <option value="sport">Sports</option>
+  <option value="edu">Education</option>
+  <option value="pol">Politics</option>
+  <option value="dev" selected>Software Development</option>
+</select>
+<form id="chatForm">
+<!-- This Div will contain All the Chats -->
+<div id="chatsContainer"></div>
+
+<!-- A text field to let user enter his/her name -->
+<!-- <input type="text" id="username" placeholder="Enter your name..."> -->
+<br>
+<!-- This is were we write our message -->
+<input type="text" id="myMsg" placeholder="Write your message...">
+<br>
+<!-- And this is our "Send Button" -->
+<button id="sendBtn">Send</button>
+</form>
+
+
+
+<script type="text/javascript" src="public/scripts/script.js"></script>
+<script src="/socket.io/socket.io.js"></script>
