@@ -5,7 +5,6 @@
 <div class="filterPals">
   <% if (typeof potentialpal !== 'undefined') { %>
     <% if (typeof sendORcanc === 'undefined') { %>
-      <% var randNum = Math.floor(Math.random()*potentialpal.length); %>
       <% potentialpal.forEach(function(user, index) { %>
         <% if (index === randNum) { %>
            <p><strong>We have found a potential pal!</strong><br />
@@ -21,9 +20,9 @@
       <p>Your friend request has been sent!</p>
     <% } else if (sendORcanc === 'NO') { %>
       <p>We're sorry you did not like the suggested Pal!</p>
-    <% } %>
+    <% } else if (typeof done4day !== 'undefined')%>
   <% } else { %>
-    <% if (typeof error !== 'undefined') { %>
+    <% if (typeof empty !== 'undefined') { %>
       <div class='error'>We're sorry, but there are no available pals right now.<br />
         Please widen your search, or try again later.</div>
     <% } %>
@@ -34,7 +33,7 @@
     </form>
   <% } %>
   <hr />
-  <% if (typeof pending !== 'undefined' && typeof newPal !=='undefined') { %>
+  <% if (typeof pending === 'undefined' && typeof newPal === 'undefined') { %>
     <p><%= newPal[0].userName %> wanted you as their pal!<br />Would you like to become their pal?</p>
     <form action='/users/addpal' method='POST'>
       <input type='hidden' name='pal' value=''>
