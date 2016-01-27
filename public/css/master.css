@@ -7,7 +7,7 @@ body {
 
 nav {
     list-style-type: none;
-    background: blue;
+    background: #add;
 }
 
 li {
@@ -20,7 +20,9 @@ a {
   text-decoration: none;
 }
 
-
+button {
+  box-shadow: 1px 1px 5px;
+}
 
 footer {
   margin: 10px 0;
@@ -41,6 +43,57 @@ footer {
 #home h1 {
   font-size: 5em;
 }
+
+
+/*////////////////CHAT ROOM/////////*/
+
+#chatsContainer {
+  height: 300px;
+  width: 75%;
+  border: 2px inset #eee;
+  overflow: auto;
+  margin: 15px auto;
+  background: #FFF;
+}
+
+#myMsg,
+#sendBtn,
+#username {
+    width: 300px;
+    height: 30px;
+    margin-top: 5px
+}
+
+.msgfield {
+    padding: 5px;
+    background: skyblue;
+    margin: 10px;
+    border-radius: 5px;
+    border: 3px outset #CED4F5;
+}
+
+/*////////////////USERS/////////*/
+
+.myPals {
+  width: 63%;
+  display: inline-block;
+}
+
+.filterPals, .palRequests {
+  border: 1px solid #bbb;
+  background-color: #bbb;
+  padding: 0.4em;
+  width: 33%;
+  display: inline-block;
+  border-radius: 10px;
+}
+
+.error {
+  color: #e00;
+  font-weight: bold;
+  margin: 5px;
+}
+
 
 /*////////////////Misc/////////*/
 

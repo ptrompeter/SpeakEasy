@@ -52,6 +52,9 @@ module.exports = {
       matchWaiting: {
         type: Sequelize.BOOLEAN
       },
+      sentBy: {
+        type: Sequelize.STRING
+      },
       email: {
         type: Sequelize.STRING,
         isEmail: true
