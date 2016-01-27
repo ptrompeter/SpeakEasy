@@ -89,7 +89,14 @@ app.get('/about', function(req,res){
 
 
 app.get('/users', function(req, res){
-  res.render('users');
+  if (req.user.matchWaiting === true) {
+    db.user.findAll({ where: {userName: req.user.sentBy}})
+    .then(function(newPal){
+      res.render('users.ejs', {newPal: newPal, pending: req.user.matchWaiting})
+    });
+  } else {
+    res.render('users');
+  }
 });
 
 app.get('/chat', function(req, res) {
