@@ -1,43 +1,65 @@
 /*////////////////LAYOUT/////////*/
 body {
-  text-align: center;
+  color: #EDF1F3;
+
 }
 
 nav {
     list-style-type: none;
-    background: blue;
+    background: #689BD2;
 }
 
-li {
+nav li {
   display: inline-block;
-  padding: 5px;
+  padding: 15px;
 }
 
-a {
-  color: black;
-  text-decoration: none;
-}
+
+
+
 
 
 
 footer {
-  margin: 10px 0;
+
+  background-color: #ABB7BE;
+  max-height: 100%;
+  padding: 5%;
+  max-width: 100%;
+  overflow: hidden;
+
 }
 
+footer ul {
+  list-style-type: none;
+  float: right;
+}
 
+/*////////////////LINKS/////////*/
 
+footer a {
+  color: #47156C;
+}
+a {
+  color: #EDF1F3;
+  text-decoration: none;
+}
+
+a:hover {
+    color: #ABDFF8;
+}
 
 /*////////////////HOME/////////*/
 
-.container {
-  height: 500px;
+#home {
   max-width:  100%;
-  background-color: gray;
-  padding: 15px 0 0 0;
+  padding: 15px;
+  margin: 0;
+  background-color: #D2DDE1;
 }
 
 #home h1 {
-  font-size: 5em;
+  font-size: 3em;
 }
 
 /*////////////////CHAT ROOM/////////*/

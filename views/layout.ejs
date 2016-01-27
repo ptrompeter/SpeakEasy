@@ -10,16 +10,17 @@
   </head>
   <body>
     <nav>
-      <li><a href='/'>home</a></li>
-      <li><a href='/about'>about</a></li>
+      <li><a href='/'>HOME</a></li>
+      <li><a href='/about'>ABOUT</a></li>
       <% if (currentUser) { %>
        <li> Hello, <%= currentUser.userName %></li>
-       <li><a href="/auth/logout">Logout</a></li>
+       <li><a href="/auth/logout">LOGOUT</a></li>
       <% } else { %>
-      <li><a href='/auth/signup'>create account</a></li>
-      <li><a href='/auth/login'>login</a></li>
+      <li><a href='/auth/signup'>CREATE ACCOUNT</a></li>
+      <li><a href='/auth/login'>LOGIN</a></li>
       <% }%>
     </nav>
+    <div id="home">
     <% if(typeof alerts !== 'undefined'){ %>
       <% for(key in alerts){ %>
           <% alerts[key].forEach(function(thisMsg){ %>
@@ -28,6 +29,22 @@
       <% } %>
      <% } %>
     <%- body %>
-    <footer><small>art party sustainable echo park meditation.</small></footer>
+    </div>
+    <footer>
+        <ul>
+          <li><a href="#">SECURITY</a></li>
+          <li><a href="#">SAVED APPLICATION</a></li>
+          <li><a href="#">TERMS & CONDITIONS</a></li>
+          <li><a href="#">SEND A SUGGESTION</a></li>
+          <li><a href="#">PRIVACY</a></li>
+          <li><a href="#">CAREERS</a></li>
+        </ul>
+        <ul>
+          <li><a href="#">HOME</a></li>
+          <li><a href="#">ABOUT</a></li>
+          <li><a href="#">CONTACT</a></li>
+          <li><a href="#">CREATE ACCOUNT</a></li>
+        </ul>
+    </footer>
   </body>
 </html>
