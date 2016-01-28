@@ -99,9 +99,11 @@ app.get('/users', function(req, res){
     .then(function(thePal){
       res.render('users', {onceperday: onceperday, pending: true, newPal: thePal});
     });
+  } else {
+    res.render('users', {onceperday: onceperday});
   }
-  res.render('users', {onceperday: onceperday});
 });
+
 
 app.get('/chat', function(req, res) {
   res.render('chat');
