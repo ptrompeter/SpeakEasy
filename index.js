@@ -12,7 +12,7 @@ var localStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt');
 var socketIO = require('socket.io');
 var cookieParser = require('cookie-parser');
-var onceperday;
+var onceperday = false;
 
 // Middleware
 
@@ -92,20 +92,15 @@ app.get('/about', function(req,res){
 
 
 app.get('/users', function(req, res){
-  var newPal;
-  var pending;
   var currDay = getCookie(req.headers, 'onceperday');
+  onceperday =  (currDay !== '') ? true : false;
   if (req.user.matchWaiting === true) {
     db.user.findAll({ where: {userName: req.user.sentBy}})
     .then(function(thePal){
-      newPal = thePal;
-      pending = req.user.matchWaiting;
+      res.render('users', {onceperday: onceperday, pending: true, newPal: thePal});
     });
   }
-  if (typeof currDay !== 'undefined'){
-    onceperday = true;
-  }
-  res.render('users', {newPal: newPal, pending: pending, onceperday: onceperday});
+  res.render('users', {onceperday: onceperday});
 });
 
 app.get('/chat', function(req, res) {

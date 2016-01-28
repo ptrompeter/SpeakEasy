@@ -16,9 +16,7 @@
   <% } else if (sendORcanc === 'NO') { %>
     <p>We're sorry you did not like the suggested Pal!</p>
   <% } %>
-<% } else if (typeof onceperday !== 'undefined') { %>
-  <p>Sorry, you can only send one Pal request per day!</p>
-<% } else { %>
+<% } else if (typeof onceperday === 'undefined' || onceperday === false){ %>
   <% if (typeof empty !== 'undefined') { %>
     <p class='error'>We're sorry, but there are no available pals right now.<br />
     Please widen your search, or try again later.</p>
@@ -28,4 +26,6 @@
   <form action='/users/pals' method='GET'>
     <button type='submit'>Find a Pal!</button>
   </form>
+  <% } else { %>
+    <p>Sorry, you can only send one Pal request per day!</p>
 <% } %>
