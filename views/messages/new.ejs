@@ -2,7 +2,7 @@
   <form action="/messages/new" method="POST" role="form">
    <input type="hidden" class="form-control" name="user" value="<%= currentUser.id%>">
    <input type="text" class="form-control" name="pal" placeholder="Palname">
-   <textarea type="text" class="form-control" name="text"></textarea>
+   <textarea type="text" class="form-control" name="text" maxlength="2000"></textarea>
    <button class="btn btn-default" type="submit">Send</button>
   </form>
 </section>

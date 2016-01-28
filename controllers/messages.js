@@ -4,7 +4,7 @@ var router = express.Router();
 var request = require('request');
 
 
-function loginCheck() {
+function loginCheck(req, res) {
   if (typeof req.body.id === 'undefined'){
     req.flash('danger','Please login or create a new account.')
     res.redirect('/');

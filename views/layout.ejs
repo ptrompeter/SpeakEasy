@@ -43,14 +43,14 @@
         <li><a href='/auth/login'>LOGIN</a></li>
         <% }%>
       </nav>
-      <% if (!currentUser) { %>
+      <!-- <% if (!currentUser) { %> -->
       <div id="login">
         <form action="/auth/login" method="POST" role="form">
-            <input type="text" name="name" value="" placeholder="Username">
-            <input type="txt" name="name" value="" placeholder="Password">
-            <button type="button" id="usrBtn">Login</button>
+            <input type="text" name="username" placeholder="Username" />
+            <input type="text" name="password" placeholder="Password" />
+            <button type="submit" id="frontLoginBtn">Login</button>
         </form>
-        <% } %>
+        <!-- <% } %> -->
       </div>
     </header>
     <div id="home">
