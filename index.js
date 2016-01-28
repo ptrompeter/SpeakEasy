@@ -10,11 +10,31 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var localStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt');
-var socketIO = require('socket.io');
+var app = express();
+var http = require('http');
 
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
 // Middleware
 
-var app = express();
+//Chat connection and Code (Socket)//
+var rooms;
+io.on('connection', function(socket) {
+
+    console.log('new connection made, id=' + socket.id);
+    socket.on('room', function(room) {
+          rooms = room;
+          console.log('Connected to room: '+rooms);
+          socket.join(room);
+      });
+
+    socket.on('msg', function(incomingMsg) {
+        io.to(rooms).emit('msg', incomingMsg);
+    });
+});
+
+
+console.log(rooms+ " out");
 app.set('view engine', 'ejs');
 app.use(ejsLayouts);
 app.use(bodyParser.urlencoded({extended: true}));
@@ -105,13 +125,16 @@ app.get('/chat', function(req, res) {
 
 
 // Controllers
-//app.use('/chat', require('./controllers/chat.js'))
+//app.use('/chat', require('./controllers/chat.js'));
 app.use('/auth', require('./controllers/auth.js'));
 app.use('/users', require('./controllers/users.js'));
 app.use('/messages', require('./controllers/messages.js'));
 
 //App Listen
+//new listen to allow socket.io to share the port
+server.listen(process.env.PORT || 3000);
+//app.listen(process.env.PORT || 3000);
 
-app.listen(process.env.PORT || 3000);
+
 
 console.log("Server running on port 3000...");
