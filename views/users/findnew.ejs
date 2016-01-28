@@ -15,11 +15,13 @@
     <p>Your friend request has been sent!</p>
   <% } else if (sendORcanc === 'NO') { %>
     <p>We're sorry you did not like the suggested Pal!</p>
-  <% } else if (typeof done4day !== 'undefined')%>
+  <% } %>
+<% } else if (typeof onceperday !== 'undefined') { %>
+  <p>Sorry, you can only send one Pal request per day!</p>
 <% } else { %>
   <% if (typeof empty !== 'undefined') { %>
-    <div class='error'>We're sorry, but there are no available pals right now.<br />
-      Please widen your search, or try again later.</div>
+    <p class='error'>We're sorry, but there are no available pals right now.<br />
+    Please widen your search, or try again later.</p>
   <% } %>
   You haven't found a new pal for today!<br />
   Would you like to find a new pal?<br />

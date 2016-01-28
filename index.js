@@ -11,6 +11,8 @@ var flash = require('connect-flash');
 var localStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt');
 var socketIO = require('socket.io');
+var cookieParser = require('cookie-parser');
+var onceperday;
 
 // Middleware
 
@@ -19,9 +21,10 @@ app.set('view engine', 'ejs');
 app.use(ejsLayouts);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
+app.use(cookieParser());
 
 //.uses for authentication
-app.use(session({ secret: 'M4nym4ny411the53kr3tZ', resave: false, saveUninitialized: true}));
+app.use(session({secret: 'M4nym4ny411the53kr3tZ', resave: false, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -89,14 +92,20 @@ app.get('/about', function(req,res){
 
 
 app.get('/users', function(req, res){
+  var newPal;
+  var pending;
+  var currDay = getCookie(req.headers, 'onceperday');
   if (req.user.matchWaiting === true) {
     db.user.findAll({ where: {userName: req.user.sentBy}})
-    .then(function(newPal){
-      res.render('users.ejs', {newPal: newPal, pending: req.user.matchWaiting})
+    .then(function(thePal){
+      newPal = thePal;
+      pending = req.user.matchWaiting;
     });
-  } else {
-    res.render('users');
   }
+  if (typeof currDay !== 'undefined'){
+    onceperday = true;
+  }
+  res.render('users', {newPal: newPal, pending: pending, onceperday: onceperday});
 });
 
 app.get('/chat', function(req, res) {
@@ -115,3 +124,20 @@ app.use('/messages', require('./controllers/messages.js'));
 app.listen(process.env.PORT || 3000);
 
 console.log("Server running on port 3000...");
+
+
+
+function getCookie(reqHead, cooky) {
+    if (reqHead.cookie.length > 0) {
+      c_start = reqHead.cookie.indexOf(cooky + "=");
+      if (c_start != -1) {
+        c_start = c_start + cooky.length + 1;
+        c_end = reqHead.cookie.indexOf(";", c_start);
+        if (c_end == -1) {
+            c_end = reqHead.cookie.length;
+        }
+        return decodeURI(reqHead.cookie.substring(c_start, c_end));
+      }
+    }
+    return "";
+}

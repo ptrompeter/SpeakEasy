@@ -3,17 +3,15 @@ var db = require('../models');
 var passport = require('passport');
 var router = express.Router();
 var potentialpal;
+var accORrej;
 var sendORcanc;
-var done4day;
 var empty;
 var pending;
 var newPal;
-var accORrej;
+
 // Routes
 
 router.get('/pals', function(req, res){
-  var excl = [];
-  var incl = [];
   db.usersPals.findAll({ where: {userId: req.user.id}}).then(function(pals){
     db.user.findAll({ where: {palRecipient: true, matchWaiting: false, id: {ne: req.user.id}}}).then(function(users){
       if (pals.length === 0) {
@@ -25,6 +23,8 @@ router.get('/pals', function(req, res){
           res.render('users.ejs', {potentialpal: users, randNum: randNum, pending: pending, newPal: newPal, accORrej: accORrej})
         }
       } else {
+        var excl = [];
+        var incl = [];
         var palsArray = pals.map(function(Pele, Pindex, Parray){
           var userArray = users.map(function(Aele, Aindex, Aarray){
             if (Pele.palId !== Aele.id) {
@@ -51,7 +51,7 @@ router.get('/pals', function(req, res){
         } else {
           randNum = Math.floor(Math.random()*incl.length);
           potentialpal = incl;
-          res.render('users.ejs', {potentialpal: incl, randNum: randNum})
+          res.render('users.ejs', {potentialpal: incl, randNum: randNum});
         }
       }
     });
@@ -65,6 +65,8 @@ router.post('/pals', function(req, res){
       potentialpal: potentialpal
     });
   } else {
+    res.cookie('onceperday', 'some value', {expire : new Date() + (24 * 360000)});
+    console.log(req.cookie);
     db.user.update({
       matchWaiting: true,
       sentBy: req.user.userName},
@@ -133,19 +135,6 @@ router.post('/settings', function(req, res){
   });
 });
 
-//   })
-//   if (req.body.palbutton==='NO'){
-//     res.render('users.ejs', {sendORcanc: req.body.palbutton, potentialpal: ''});
-//   } else {
-//     db.user.update({
-//       matchWaiting: true,
-//       sentBy: req.user.userName},
-//       {where: {userName: req.body.pal}}
-//     ).then(function(user){
-//       res.render('users.ejs', {sendORcanc: req.body.palbutton, potentialpal: ''});
-//     });
-//   }
-// });
 // Export
 
 module.exports = router;
