@@ -1,0 +1,31 @@
+<% if (typeof potentialpal !== 'undefined') { %>
+  <% if (typeof sendORcanc === 'undefined') { %>
+    <% potentialpal.forEach(function(user, index) { %>
+      <% if (index === randNum) { %>
+        <p><strong>We have found a potential pal!</strong><br />
+        <h3><%= user.userName %></h3>
+        Would you like to add <%= user.userName %>?</p>
+        <form action='/users/pals' method='POST'>
+          <input type='hidden' name='pal' value='<%= user.userName %>'>
+          <button type='submit' name='palbutton' value='YES'>Send</button> <button type='submit' name='palbutton' value='NO'>Cancel</button>
+        </form>
+      <% } %>
+    <% }); %>
+  <% } else if (sendORcanc === 'YES') { %>
+    <p>Your friend request has been sent!</p>
+  <% } else if (sendORcanc === 'NO') { %>
+    <p>We're sorry you did not like the suggested Pal!</p>
+  <% } %>
+<% } else if (typeof onceperday === 'undefined' || onceperday === false){ %>
+  <% if (typeof empty !== 'undefined') { %>
+    <p class='error'>We're sorry, but there are no available pals right now.<br />
+    Please widen your search, or try again later.</p>
+  <% } %>
+  You haven't found a new pal for today!<br />
+  Would you like to find a new pal?<br />
+  <form action='/users/pals' method='GET'>
+    <button type='submit'>Find a Pal!</button>
+  </form>
+  <% } else { %>
+    <p>Sorry, you can only send one Pal request per day!</p>
+<% } %>
