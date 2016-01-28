@@ -1,11 +1,11 @@
-/*////////////////LAYOUT/////////*/
+/* --------------------------------------
+   Layout
+   -------------------------------------- */
 body {
   /*font-family: 'Pontano Sans', sans-serif;*/
   font-family: 'Actor', sans-serif;
 }
-/* --------------------------------------
-   Layout
-   -------------------------------------- */
+
 .body {
   background: color: #EDF1F3;
   padding: 5% 10%;

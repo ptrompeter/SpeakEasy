@@ -48,13 +48,13 @@
       <div id="login">
         <form action="/auth/login" method="POST" role="form">
             <input type="text" name="name" value="" placeholder="Username">
-            <input type="txt" name="name" value="" placeholder="Password">
+            <input type="text" name="name" value="" placeholder="Password">
             <button type="button" id="usrBtn">Login</button>
         </form>
         <% } %>
       </div>
     </header>
-    <div id="home">
+    <!-- <div id="home"> -->
     <% if(typeof alerts !== 'undefined'){ %>
       <% for(key in alerts){ %>
           <% alerts[key].forEach(function(thisMsg){ %>
@@ -63,7 +63,7 @@
       <% } %>
      <% } %>
     <%- body %>
-    </div>
+    <!-- </div> -->
     <footer>
         <ul>
           <li><a href="#">SECURITY</a></li>

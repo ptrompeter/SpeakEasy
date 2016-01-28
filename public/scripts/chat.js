@@ -10,6 +10,7 @@ $(document).ready(function() {
 
 
   var apiKey = $('#hide').text();
+  console.log(apiKey);
   $('#hide').remove();
   var from = 'en';
   var to = $('#to').text();
