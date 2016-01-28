@@ -1,3 +1,8 @@
+/*////////////////LAYOUT/////////*/
+body {
+  /*font-family: 'Pontano Sans', sans-serif;*/
+  font-family: 'Actor', sans-serif;
+}
 /* --------------------------------------
    Layout
    -------------------------------------- */
@@ -251,4 +256,10 @@ a:hover {
 .text {
   text-align: left;
   margin: 5%;
+}
+
+/*///////////////Messages//////////*/
+.message {
+  font-family: 'Rokkitt', serif;
+  font-size: 1rem;
 }

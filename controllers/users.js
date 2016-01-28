@@ -1,5 +1,6 @@
 var express = require('express');
 var db = require('../models');
+// var countries = require('../countries.js')
 var passport = require('passport');
 var router = express.Router();
 
@@ -79,7 +80,8 @@ router.post('/addpal', function(req, res){
 });
 
 router.get('/settings', function(req,res){
-   res.render('users/settings.ejs', {currentUser: req.user});
+  // countries.load($('#nationality'));
+   res.render('users/settings.ejs', {currentUser: req.user})
 });
 
 router.post('/settings', function(req, res){
@@ -93,7 +95,7 @@ router.post('/settings', function(req, res){
   } else {
     sex = null;
   }
-  console.log('sex', sex);
+
   db.user.update({
     firstName: req.body.firstname,
     lastName: req.body.lastname,
