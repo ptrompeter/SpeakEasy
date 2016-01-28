@@ -4,9 +4,19 @@ var db = require('../models');
 var passport = require('passport');
 var router = express.Router();
 
+//Cheat functions
+
+function loginCheck(req, res) {
+  if (typeof req.body.id === 'undefined'){
+    req.flash('danger','Please login or create a new account.')
+    res.redirect('/');
+  }
+}
+
 // Routes
 
 router.get('/pals', function(req, res){
+  loginCheck(req, res)
   var excl = [];
   var incl = [];
   db.usersPals.findAll({ where: {userId: req.user.id}}).then(function(pals){
@@ -80,13 +90,12 @@ router.post('/addpal', function(req, res){
 });
 
 router.get('/settings', function(req,res){
+  loginCheck(req, res)
   // countries.load($('#nationality'));
    res.render('users/settings.ejs', {currentUser: req.user})
 });
 
 router.post('/settings', function(req, res){
-    console.log(req);
-    console.log(req.body.gender);
   var sex;
   if ((req.body.gender === 'm') || (req.body.gender = 'male')){
     sex = 1;

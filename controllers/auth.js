@@ -29,7 +29,7 @@ router.post('/signup',function(req,res){
        req.flash('success','You are signed up.')
        res.redirect('/');
      }else{
-       req.flash('danger','A user with that e-mail address already exists.');
+       req.flash('danger','A user with that username already exists.');
        res.redirect('/auth/signup');
      }
    }).catch(function(err){
