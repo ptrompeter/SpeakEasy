@@ -5,22 +5,53 @@
     <title>SpeakEasy: your penpal app</title>
     <link rel="stylesheet" href="/css/normalize.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="/css/master.css" media="screen" title="no title" charset="utf-8">
+    <script src="scripts/languages.js"></script>
+    <!-- <script src="scripts/chat.js"></script> -->
+    <!-- Mobile viewport optimized -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<!-- Bootstrap CSS -->
+		<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+		<link href="includes/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+		<!-- Custom CSS -->
+		<!-- <link href="includes/css/styles.css" rel="stylesheet"> -->
+
+		<!-- Include Modernizr in the head, before any other Javascript -->
+		<script src="includes/js/modernizr-2.6.2.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="../public/scripts/chat.js"></script>
+
+
   </head>
   <body>
-    <nav>
-      <li><a href='/'>home</a></li>
-      <li><a href='/about'>about</a></li>
-      <% if (currentUser) { %>
-        <li><a href='/users'>users page</a></li>
-       <li> Hello, <%= currentUser.userName %></li>
-       <li><a href="/auth/logout">Logout</a></li>
-      <% } else { %>
-      <li><a href='/auth/signup'>create account</a></li>
-      <li><a href='/auth/login'>login</a></li>
-      <% }%>
-    </nav>
+    <header>
+      <div id="logo">
+          <p>LOGO</p>
+      </div>
+
+      <nav>
+        <li><a href='/'>HOME</a></li>
+        <li><a href='/about'>ABOUT</a></li>
+        <% if (currentUser) { %>
+          <li><a href='/users'>users page</a></li>
+         <li> Hello, <%= currentUser.userName %></li>
+         <li><a href="/auth/logout">LOGOUT</a></li>
+        <% } else { %>
+        <li><a href='/auth/signup'>CREATE ACCOUNT</a></li>
+        <li><a href='/auth/login'>LOGIN</a></li>
+        <% }%>
+      </nav>
+      <% if (!currentUser) { %>
+      <div id="login">
+        <form action="/auth/login" method="POST" role="form">
+            <input type="text" name="name" value="" placeholder="Username">
+            <input type="txt" name="name" value="" placeholder="Password">
+            <button type="button" id="usrBtn">Login</button>
+        </form>
+        <% } %>
+      </div>
+    </header>
+    <div id="home">
     <% if(typeof alerts !== 'undefined'){ %>
       <% for(key in alerts){ %>
           <% alerts[key].forEach(function(thisMsg){ %>
@@ -29,6 +60,36 @@
       <% } %>
      <% } %>
     <%- body %>
-    <footer><small>art party sustainable echo park meditation.</small></footer>
+    </div>
+    <footer>
+        <ul>
+          <li><a href="#">SECURITY</a></li>
+          <li><a href="#">SAVED APPLICATION</a></li>
+          <li><a href="#">TERMS & CONDITIONS</a></li>
+          <li><a href="#">SEND A SUGGESTION</a></li>
+          <li><a href="#">PRIVACY</a></li>
+          <li><a href="#">CAREERS</a></li>
+        </ul>
+        <ul>
+          <li><a href="#">HOME</a></li>
+          <li><a href="#">ABOUT</a></li>
+          <li><a href="#">CONTACT</a></li>
+          <li><a href="#">CREATE ACCOUNT</a></li>
+        </ul>
+    </footer>
+
+  <!-- All Javascript at the bottom of the page for faster page loading -->
+
+	<!-- First try for the online version of jQuery-->
+	<script src="http://code.jquery.com/jquery.js"></script>
+
+	<!-- If no online access, fallback to our hardcoded version of jQuery -->
+	<script>window.jQuery || document.write('<script src="includes/js/jquery-1.8.2.min.js"><\/script>')</script>
+
+	<!-- Bootstrap JS -->
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+
+	<!-- Custom JS -->
+	<script src="includes/js/script.js"></script>
   </body>
 </html>
