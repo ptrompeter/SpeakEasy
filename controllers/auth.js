@@ -26,7 +26,10 @@ router.post('/signup',function(req,res){
      }
    }).spread(function(user,created){
      if(created){
-       req.flash('success','You are signed up.')
+       req.flash('success','You are signed up.');
+       req.login(user,function(error){
+         if(error) throw error;
+       });
        res.redirect('/');
      }else{
        req.flash('danger','A user with that username already exists.');
@@ -51,6 +54,7 @@ router.get('/login', function(req,res){
 // Logging In - creating session
 router.post('/login', function(req,res){
   passport.authenticate('local', function(error,user,info){
+    console.log(user);
     if(user){
       req.login(user,function(error){
         if(error) throw error;

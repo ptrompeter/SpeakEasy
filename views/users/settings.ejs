@@ -14,7 +14,9 @@
       Language: <input type='text' id='language' class='form-control' name='language' value="<%= currentUser.language%>"/>
     </div>
     <div>
-      Nationality: <select type='text' id='nationality' class='form-control' name='nationality' value="<%= currentUser.nationality%>"></select>
+      Nationality: <select type='text' id='nationality' class='form-control' name='nationality' value="<%= currentUser.nationality%>">
+        <option value='null' selected> -no selection- </option>
+      </select>
     </div>
     <div>
       Gender: <input type='text' id='gender' class='form-control' name='gender' value="<%= currentUser.gender%>"/>

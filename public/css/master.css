@@ -1,6 +1,37 @@
+
 /* --------------------------------------
    Layout
    -------------------------------------- */
+
+/**********************************************STYLE GUIDE**********************************************
+|                                    Don't be afraid to experiment!                                    |
+|                                                                                                      |
+|                                             Whitescales                                              |
+| #EDF1F3 - Lightest color. Can be used for content background (lighter than main background).         |
+| #D2DDE1 - One shade darker. Useful for on hover effects on sidebar, as well as MAIN BG               |
+| #ABB7BE - One more shade darker. Useful for sidebar and footer background colors.                    |
+|                                                                                                      |
+|                                             Bright Color                                             |
+| #ABDFF8 - Faded sky blue. Possibly main :hover color for most situations. Experimentation is key.    |
+|                                                                                                      |
+|                                             Medium Colors                                            |
+| #689BD2 - Cool blue. Feels like a good color for a main nav bar.                                     |
+| #634B9E - Strong purple. This color stands out but doesn't distract. Possible color for the buttons  |
+|                          and maybe it could be for a thin 1px border on some places too.             |
+|   (Like I said, we should experiment. Try switching these two colors and see if that looks better)   |
+|                                                                                                      |
+|                                              Dark Colors                                             |
+| #47156C - The dark purple. This color can be font-color for a bright field with dark text, or switch |
+|                            it with #EDF1F3 and run a dark background with lighter text.              |
+|                                                                                                      |
+|                                               Gradients                                              |
+| #47156C -> #69368A - Same dark purple as above, transitioning to medium shade. Can be used as a      |
+|                      background graident inplace of the solid color, or just the top 1/3rd.          |
+| #3169A4 -> #050B12 - A medium deep blue translates to a slightly tinted black. These colors can vary |
+|                     for a few purposes. Experimentation will help figure out where we will use this. |
+*******************************************************************************************************/
+
+
 body {
   /*font-family: 'Pontano Sans', sans-serif;*/
   font-family: 'Actor', sans-serif;
