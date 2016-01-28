@@ -1,8 +1,8 @@
 <section id='settings'>
   <h4>Adding additional information about yourself is optional, but it improves the likelihood that you'll be selected as someone's new pal</h4>
+  <script src='../scripts/countries.js'></script>
   <form id='userinfo' action="/users/settings" method="POST" role="form">
     <div>
-
     </div>
     <div>
       First name: <input type='text' id='firstname' class='form-control' name='firstname' value="<%= currentUser.firstName%>"/>
@@ -14,7 +14,9 @@
       Language: <input type='text' id='language' class='form-control' name='language' value="<%= currentUser.language%>"/>
     </div>
     <div>
-      Nationality: <input type='text' id='nationality' class='form-control' name='nationality' value="<%= currentUser.nationality%>"/>
+      Nationality: <select type='text' id='nationality' class='form-control' name='nationality' value="<%= currentUser.nationality%>">
+        <option value='null' selected> -no selection- </option>
+      </select>
     </div>
     <div>
       Gender: <input type='text' id='gender' class='form-control' name='gender' value="<%= currentUser.gender%>"/>

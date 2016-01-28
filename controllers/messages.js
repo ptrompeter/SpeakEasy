@@ -4,7 +4,12 @@ var router = express.Router();
 var request = require('request');
 
 
-
+function loginCheck(req, res) {
+  if (typeof req.body.id === 'undefined'){
+    req.flash('danger','Please login or create a new account.')
+    res.redirect('/');
+  }
+}
 
 
 
@@ -14,6 +19,7 @@ var request = require('request');
 
 //Directs to message form
 router.get('/new', function(req,res){
+  loginCheck(req, res);
   res.render('messages/new.ejs')
 });
 
@@ -28,7 +34,11 @@ router.post('/new', function (req,res){
 db.user.find({where: {userName: req.body.pal}}).then(function(pal) {
 //Variables for googleapis//
   var apiKey = 'key='+process.env.SPEAKEASY_KEY+'&';
-  console.log(apiKey);
+  console.log(' ');
+  console.log(" ",'pal:', pal, " ");
+  console.log(' ');
+  console.log(req);
+  console.log(' ');
   var from = req.user.language; //source of language//
   var to = pal.language; //translating language//
   var url = 'https://www.googleapis.com/language/translate/v2?q=';
@@ -64,7 +74,8 @@ db.user.find({where: {userName: req.body.pal}}).then(function(pal){
 
 // Get current user's sent messages
 router.get('/sent', function(req,res){
- db.message.findAll({ where: {userId: req.user.id}}).then(function(messages){
+  loginCheck(req, res);
+  db.message.findAll({ where: {userId: req.user.id}}).then(function(messages){
    res.render('messages/sent.ejs', {messages: messages});
   //  res.send(messages);
  });
@@ -73,6 +84,7 @@ router.get('/sent', function(req,res){
 
 // Get current user's received messages
 router.get('/received', function(req,res){
+  loginCheck(req, res);
  db.message.findAll({ where: {palId: req.user.id}}).then(function(messages){
    res.render('messages/received.ejs', {currentUser: res});
  });

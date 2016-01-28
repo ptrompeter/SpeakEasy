@@ -1,6 +1,8 @@
 //adding requirements for npm requirements
 
 var express = require('express');
+
+// Middleware
 var bodyParser = require('body-parser');
 var ejsLayouts = require('express-ejs-layouts');
 var request = require('request');
@@ -10,18 +12,40 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var localStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt');
-var socketIO = require('socket.io');
-
-// Middleware
-
 var app = express();
+var http = require('http');
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
+var cookieParser = require('cookie-parser');
+var onceperday = false;
+
+
+//Chat connection and Code (Socket)//
+var rooms;
+io.on('connection', function(socket) {
+
+    console.log('new connection made, id=' + socket.id);
+    socket.on('room', function(room) {
+          rooms = room;
+          console.log('Connected to room: '+rooms);
+          socket.join(room);
+      });
+
+    socket.on('msg', function(incomingMsg) {
+        io.to(rooms).emit('msg', incomingMsg);
+    });
+});
+
+
+console.log(rooms+ " out");
 app.set('view engine', 'ejs');
 app.use(ejsLayouts);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
+app.use(cookieParser());
 
 //.uses for authentication
-app.use(session({ secret: 'M4nym4ny411the53kr3tZ', resave: false, saveUninitialized: true}));
+app.use(session({secret: 'M4nym4ny411the53kr3tZ', resave: false, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -89,29 +113,60 @@ app.get('/about', function(req,res){
 
 
 app.get('/users', function(req, res){
+  var currDay = getCookie(req.headers, 'onceperday');
+  onceperday =  (currDay !== '') ? true : false;
   if (req.user.matchWaiting === true) {
     db.user.findAll({ where: {userName: req.user.sentBy}})
-    .then(function(newPal){
-      res.render('users.ejs', {newPal: newPal, pending: req.user.matchWaiting})
+    .then(function(thePal){
+      res.render('users', {onceperday: onceperday, pending: true, newPal: thePal});
     });
   } else {
-    res.render('users');
+    res.render('users', {onceperday: onceperday});
   }
 });
+
 
 app.get('/chat', function(req, res) {
   res.render('chat');
 });
 
+function loginCheck(req, res) {
+  if (typeof req.body.id === 'undefined'){
+    req.flash('danger','Please login or create a new account.')
+    res.redirect('/');
+  }
+}
+
 
 // Controllers
-//app.use('/chat', require('./controllers/chat.js'))
+//app.use('/chat', require('./controllers/chat.js'));
 app.use('/auth', require('./controllers/auth.js'));
 app.use('/users', require('./controllers/users.js'));
+// app.use('/users', require('./controllers/countries.js'));
 app.use('/messages', require('./controllers/messages.js'));
 
 //App Listen
+//new listen to allow socket.io to share the port
+server.listen(process.env.PORT || 3000);
+//app.listen(process.env.PORT || 3000);
 
-app.listen(process.env.PORT || 3000);
+
 
 console.log("Server running on port 3000...");
+
+
+
+function getCookie(reqHead, cooky) {
+    if (reqHead.cookie.length > 0) {
+      c_start = reqHead.cookie.indexOf(cooky + "=");
+      if (c_start != -1) {
+        c_start = c_start + cooky.length + 1;
+        c_end = reqHead.cookie.indexOf(";", c_start);
+        if (c_end == -1) {
+            c_end = reqHead.cookie.length;
+        }
+        return decodeURI(reqHead.cookie.substring(c_start, c_end));
+      }
+    }
+    return "";
+}

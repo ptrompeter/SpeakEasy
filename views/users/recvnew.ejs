@@ -1,0 +1,19 @@
+<% if (typeof pending === 'undefined' || pending === false) { %>
+  <% if (typeof palName === 'undefined') { %>
+      <% if (typeof accORrej === 'undefined') { %>
+        <p>You currently have no pending Pal requests.</p>
+      <% } else if (accORrej === 'YES') { %>
+        <% console.log(palName) %>
+        <p>You've accepted <%= palName %> as a new pal!</p>
+      <% } else if (accORrej === 'NO') { %>
+        <p>You've declined <%= palName %>'s request.</p>
+      <% } %>
+    <% } %>
+  <% } %>
+<% } else { %>
+  <p><%= palName %> wanted you as their pal!<br />Would you like to become their pal?</p>
+  <form action='/users/addpal' method='POST'>
+    <input type='hidden' name='pal' value=''>
+    <button type='submit' name='palbutton' value='YES'>Add</button> <button type='submit' name='palbutton' value='NO'>Decline</button>
+  </form>
+<% } %>
