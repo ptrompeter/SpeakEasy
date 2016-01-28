@@ -145,10 +145,6 @@ router.post('/settings', function(req, res){
   });
 });
 
-router.post('/deletecookie', function(req, res){
-  res.cookie('onceperday', 'some value', {expire : new Date() - (24 * 360000 * 10)});
-})
-
 
 // Export
 
