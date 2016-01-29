@@ -48,6 +48,7 @@ nav {
     background: #689BD2;
     float: left;
     margin-top: 20px;
+    display: inline;
 
 }
 
@@ -55,6 +56,7 @@ nav li {
   display: inline-block;
   padding: 15px;
 }
+
 
 
 
@@ -110,6 +112,11 @@ header #login {
   float: right;
   margin: 25px 20px 0 0;
 }
+
+#hamMenu {
+  float: right;
+  display: none;
+}
 /* --------------------------------------
    Links
    -------------------------------------- */
@@ -129,6 +136,11 @@ a:hover {
 /* --------------------------------------
    Home
    -------------------------------------- */
+
+
+   #loginMobile form {
+     display: none;
+   }
 
 /*#home {
   max-width:  100%;
@@ -150,7 +162,7 @@ a:hover {
   width: 200px;
   line-height: 50px;
   border-radius: 5px;
-  float: right;
+
 }
 div#im a {
     font-size: 1.5em;
@@ -216,6 +228,7 @@ div#im a {
 
 #myCarousel h1 {
    margin-bottom: 100px;
+   font-size: 70px;
 }
 
 
@@ -244,6 +257,7 @@ div#im a {
 /* Landscape phone to portrait tablet */
 @media (max-width: 768px) {
 
+
    #myCarousel .item { height: 310px;}
 
    #slide1 {
@@ -268,23 +282,69 @@ div#im a {
 
 }
 
+@media only screen and (max-width: 890px) {
+    div#login form {
+      display: none;
+    }
+
+
+}
+
 /* Large desktop */
-@media (min-width: 1200px) {
+@media only screen and (max-width: 680px) {
+ #loginMobile form {
+    display: inline;
+  }
 
-   #myCarousel .item { height: 500px;}
+ header {
+   padding-top: 10px;
+ }
 
-   #slide1 {
-      background: url('../../images/pic1.jpg') top center no-repeat;
-   }
+ header #logo {
+   height: 60px;
+   float: none;
+ }
 
-   #slide2 {
-      background: url('../../images/pic2.jpg') top center no-repeat;
-   }
+ #myCarousel {
+   display: none;
+ }
 
-   #slide3 {
-      background: url('../../images/pick3.jpg') top center no-repeat;
-   }
+  nav#nav {
+      list-style-type: none;
+      background: #689BD2;
+      float: left;
+      margin-top: 20px;
+      display: none;
 
+  }
+
+  nav li {
+    display: block;
+    padding: 15px;
+    margin-right: 680px;
+  }
+
+  footer ul{
+    float: none;
+  }
+
+  #frontLoginBtn {
+    margin-top: 15px;
+  }
+
+  #hamMenu {
+    float: right;
+    display: inline;
+
+  }
+  #loginMobile form {
+    margin: 100px 0 150px 0;
+  }
+  #loginMobile input {
+    height: 30px;
+    width: 250px;
+    margin: 10px 0;
+  }
 }
 
 

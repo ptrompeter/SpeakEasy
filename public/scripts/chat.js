@@ -47,5 +47,7 @@ $(window).load(function() {
       $('#chatsContainer').append(decoratedHtml);
   });
 
-
+  $('#hamMenu').on('click', function() {
+      $('nav').slideToggle();
+   }); 
 });
