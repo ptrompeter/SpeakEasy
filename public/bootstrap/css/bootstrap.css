@@ -740,38 +740,6 @@ pre code {
   clear: both;
 }
 
-.row:before,
-.row:after {
-  display: table;
-  content: " ";
-}
-
-.row:after {
-  clear: both;
-}
-
-.row:before,
-.row:after {
-  display: table;
-  content: " ";
-}
-
-.row:after {
-  clear: both;
-}
-
-@media (min-width: 768px) {
-  .row {
-    margin-right: -15px;
-    margin-left: -15px;
-  }
-}
-
-.row .row {
-  margin-right: -15px;
-  margin-left: -15px;
-}
-
 .col-1,
 .col-2,
 .col-3,
@@ -830,7 +798,7 @@ pre code {
 }
 
 .col-1 {
-  width: 8.333333333333332%;
+  width: 8.33333333333332%;
 }
 
 .col-2 {

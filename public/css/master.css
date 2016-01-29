@@ -31,17 +31,14 @@
 Layout
 -------------------------------------- */
 
-body {
+html {
  font-family: 'Actor', sans-serif;
+ overflow-x: hidden;
 }
 
 .maincontent {
  background-color: #EDF1F3;
  padding: 5% 10%;
-}
-
-nav li {
-  display: inline-block;
 }
 
 .alert {
@@ -51,64 +48,73 @@ nav li {
 }
 
 button {
-  box-shadow: 1px 1px 5px;
-  margin: 15px 0;
+  box-shadow: 2px 2px 2px;
+  /*margin: 15px 0;*/
 }
 
 footer {
-
   background-color: #ABB7BE;
-  max-height: 100%;
+  height: 10px;
   padding: 5%;
   max-width: 100%;
   overflow: hidden;
-
 }
 
 footer ul {
   list-style-type: none;
   text-align: center;
 }
+
+footer li {
+  display: inline-block;
+}
+
 /* --------------------------------------
    Header
    -------------------------------------- */
+
 header {
   background-color: #634B9E;
   height: 100px;
-
 }
+
 .mynav {
   list-style: none;
-  margin-top: 5px;
+  padding-top: 30px;
 }
+
 .mynav li {
   display: inline;
 }
 
 header #logo {
-  height: 80px;
-  width: 80px;
+  height: 7%%;
+  width: 7%;
   overflow: hidden;
   line-height: 25px
   padding: 1px;
   float: left;
   margin: 10px 5px 0 10px;
 }
-header #logo p {
-  color: white;
-  text-align: center;
-  padding: 0;
-  margin-top: 30%;
-}
 
 #logo img {
-  width: 100%;
+  max-width: 100%;
 }
 
-header #login {
+header #headLogin {
   float: right;
-  margin: 25px 20px 0 0;
 }
+
+div#loginMobile {
+  display:none;
+}
+
+@media only screen and (max-width: 670px) {
+  .carousel-control {
+    background-image: image();
+  }
+}
+
 /* --------------------------------------
    Links
    -------------------------------------- */
@@ -116,6 +122,7 @@ header #login {
 footer a {
   color: #47156C;
 }
+
 a {
   color: #EDF1F3;
   text-decoration: none;
@@ -124,22 +131,6 @@ a {
 a:hover {
     color: #ABDFF8;
 }
-
-/* --------------------------------------
-   Home
-   -------------------------------------- */
-
-/*#home {
-  max-width:  100%;
-  padding: 0;
-  margin: 0;
-  background-color: #D2DDE1;
-}
-
-#home h1 {
-  font-size: 3em;
-}*/
-
 
 /* --------------------------------------
    Chat Room
@@ -209,7 +200,7 @@ a:hover {
    font-size: 24px;
 }
 
-#myCarousel .item { height: 400px;}
+#myCarousel .item { height: 300px;}
 
 #slide1 {
    background: url('../../images/sanfran.jpg') top center no-repeat;
@@ -223,13 +214,13 @@ a:hover {
    background: url('../../images/paris.jpg') top center no-repeat;
 }
 
+
 /* Landscape phone to portrait tablet */
 @media (max-width: 768px) {
 
    #myCarousel .item { height: 310px;}
 
    #slide1 {
-<<<<<<< HEAD
       background: url('../../images/sanfran.jpg') top center no-repeat;
    }
 
@@ -239,17 +230,6 @@ a:hover {
 
    #slide3 {
       background: url('../../paris.jpg') top center no-repeat;
-=======
-      background: url('../../images/carousel_small_01.jpg') top center no-repeat;
-   }
-
-   #slide2 {
-      background: url('../../images/carousel_small_02.jpg') top center no-repeat;
-   }
-
-   #slide3 {
-      background: url('../../images/carousel_small_03.jpg') top center no-repeat;
->>>>>>> f5cbf069966a2afd48f30750aaaa688776f22992
    }
 
    .carousel-caption {
@@ -265,26 +245,27 @@ a:hover {
 /* Large desktop */
 @media (min-width: 1200px) {
 
-   #myCarousel .item { height: 500px;}
+   #myCarousel .item {
+     height: 400px;
+     max-width: 100%;
+   }
 
    #slide1 {
-      background: url('../../images/carousel_large_01.jpg') top center no-repeat;
+      background: url('../../images/sanfran.jpg') top center no-repeat;
    }
 
    #slide2 {
-      background: url('../../images/carousel_large_02.jpg') top center no-repeat;
+      background: url('../../images/tokyo.jpg') top center no-repeat;
    }
 
    #slide3 {
-      background: url('../../images/carousel_large_03.jpg') top center no-repeat;
+      background: url('../../paris.jpg') top center no-repeat;
    }
 
-<<<<<<< HEAD
+
 /* Large desktop */
 @media only screen and (max-width: 680px) {
- #loginMobile form {
-    display: inline;
-  }
+
 
  header {
    padding-top: 10px;
@@ -318,25 +299,22 @@ a:hover {
     float: none;
   }
 
-  #frontLoginBtn {
-    margin-top: 15px;
-  }
-
   #hamMenu {
     float: right;
     display: inline;
-
   }
+
   #loginMobile form {
+    display: inline;
     margin: 100px 0 150px 0;
   }
+
   #loginMobile input {
     height: 30px;
     width: 250px;
     margin: 10px 0;
   }
-=======
->>>>>>> f5cbf069966a2afd48f30750aaaa688776f22992
+
 }
 
 
@@ -353,7 +331,7 @@ a:hover {
   margin: 5%;
 }
 
-#loginMobile > form {
+#loginMobile form {
   display: none;
 }
 
