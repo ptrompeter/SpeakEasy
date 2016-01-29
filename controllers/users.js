@@ -8,13 +8,12 @@ var sendORcanc;
 var empty;
 var pending;
 var newPal;
+var myPals;
 
 //Cheat functions
 
 function loginCheck(req, res) {
-  // console.log(req);
   if (typeof req.user === 'undefined'){
-  // if (!req.user.id){
     req.flash('danger','Please login or create a new account.')
     res.redirect('/');
   }
@@ -35,35 +34,15 @@ router.get('/pals', function(req, res){
           res.render('users.ejs', {potentialpal: users, randNum: randNum, pending: pending, newPal: newPal, accORrej: accORrej})
         }
       } else {
-        var excl = [];
-        var incl = [];
-        var palsArray = pals.map(function(Pele, Pindex, Parray){
-          var userArray = users.map(function(Aele, Aindex, Aarray){
-            if (Pele.palId !== Aele.id) {
-              if (typeof excl[0] === 'undefined') {
-                if (incl.indexOf(Aele) === -1){
-                  incl.push(Aele);
-                }
-              } else {
-                var exclmap = excl.map(function(Eele, Eindex, Earray){
-                  if (Eele !== Aele.id) {
-                    if (incl.indexOf(Aele) === -1){
-                      incl.push(Aele);
-                    }
-                  }
-                });
-              }
-            } else {
-              excl.push(Aele.id);
-            }
-          });
-        });
+        var incl = compareArrays(users, pals, 'incl');
         if (incl.length===0){
-          res.render('users.ejs', {empty: true, pending: pending, newPal: newPal, accORrej: accORrej});
+          myPals = pals;
+          res.render('users.ejs', {empty: true, pending: pending, newPal: newPal, accORrej: accORrej, myPals: myPals});
         } else {
           randNum = Math.floor(Math.random()*incl.length);
           potentialpal = incl;
-          res.render('users.ejs', {potentialpal: incl, randNum: randNum});
+          myPals = pals;
+          res.render('users.ejs', {potentialpal: incl, randNum: randNum, myPals: myPals});
         }
       }
     });
@@ -72,22 +51,12 @@ router.get('/pals', function(req, res){
 
 router.post('/pals', function(req, res){
   if (req.body.palbutton==='NO'){
-    res.render('users.ejs', {
-      sendORcanc: req.body.palbutton,
-      potentialpal: potentialpal
-    });
+    res.render('users.ejs', {sendORcanc: req.body.palbutton, potentialpal: potentialpal, myPals: myPals});
   } else {
     res.cookie('onceperday', 'some value', {expire : new Date() + (24 * 360000)});
-    // console.log(req.cookie);
-    db.user.update({
-      matchWaiting: true,
-      sentBy: req.user.userName},
-      {where: {userName: req.body.pal}}
-    ).then(function(user){
-      res.render('users.ejs', {
-        sendORcanc: req.body.palbutton,
-        potentialpal: potentialpal
-      });
+    db.user.update({matchWaiting: true, sentBy: req.user.userName}, {where: {userName: req.body.pal}})
+    .then(function(user){
+      res.render('users.ejs', {sendORcanc: req.body.palbutton, potentialpal: potentialpal, myPals: myPals});
     });
   }
 });
@@ -98,7 +67,7 @@ router.post('/addpal', function(req, res){
     {where: {userName: req.user.userName}}
   ).then(function(value){
     if (req.body.palbutton==='NO'){
-      res.render('users.ejs', {pending: req.user.matchWaiting, accORrej: req.body.palbutton});
+      res.render('users.ejs', {pending: req.user.matchWaiting, accORrej: req.body.palbutton, myPals: myPals});
     } else {
       db.user.find({where: {userName: req.user.sentBy}}).then(function(pal){
         db.usersPals.create({
@@ -109,7 +78,7 @@ router.post('/addpal', function(req, res){
             userId: pal.id,
             palId: req.user.id
           }).then(function(value){
-            res.render('users.ejs', {pending: req.user.matchWaiting, accORrej: req.body.palbutton, palName: pal.userName});
+            res.render('users.ejs', {myPals: myPals, pending: req.user.matchWaiting, accORrej: req.body.palbutton, palName: pal.userName});
           });
         });
       });
@@ -132,7 +101,6 @@ router.post('/settings', function(req, res){
   } else {
     sex = null;
   }
-
   db.user.update({
     firstName: req.body.firstname,
     lastName: req.body.lastname,
@@ -146,6 +114,39 @@ router.post('/settings', function(req, res){
     res.redirect('back')
   });
 });
+
+
+//
+
+var compareArrays = function(usersarray, palsarray, whatToReturn){
+  var excl = [];
+  var incl = [];
+  var temp = palsarray.map(function(Pele, Pindex, Parray){
+    var temp2 = usersarray.map(function(Aele, Aindex, Aarray){
+      if (Pele.palId !== Aele.id) {
+        if (typeof excl[0] === 'undefined') {
+          if (incl.indexOf(Aele) === -1){
+            incl.push(Aele);
+          }
+        } else {
+          var exclmap = excl.map(function(Eele, Eindex, Earray){
+            if (Eele !== Aele.id) {
+              if (incl.indexOf(Aele) === -1){
+                incl.push(Aele);
+              }
+            }
+          });
+        }
+      } else {
+        excl.push(Aele.id);
+      }
+    });
+  });
+  if (whatToReturn === 'incl'){
+    return incl;
+  } else { return excl; }
+}
+
 
 
 // Export
