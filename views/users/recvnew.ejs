@@ -3,7 +3,6 @@
       <% if (typeof accORrej === 'undefined') { %>
         <p>You currently have no pending Pal requests.</p>
       <% } else if (accORrej === 'YES') { %>
-        <% console.log(palName) %>
         <p>You've accepted <%= palName %> as a new pal!</p>
       <% } else if (accORrej === 'NO') { %>
         <p>You've declined <%= palName %>'s request.</p>

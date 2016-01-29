@@ -5,7 +5,7 @@ var request = require('request');
 
 
 function loginCheck(req, res) {
-  if (typeof req.body.id === 'undefined'){
+  if (typeof req.user === 'undefined'){
     req.flash('danger','Please login or create a new account.')
     res.redirect('/');
   }
@@ -46,7 +46,7 @@ db.user.find({where: {userName: req.body.pal}}).then(function(pal) {
   var translations;
 //api http request to googleapi//
  request(url+input+'&source='+from+'&target='+to+'&'+apiKey, function (error, response, body) {
-   console.log("4 user: "+req.user.language+" pal: "+pal.language);
+  //  console.log("4 user: "+req.user.language+" pal: "+pal.language);
      if (!error && response.statusCode == 200) {
          var data =JSON.parse(body);
          translations = data.data.translations[0].translatedText;

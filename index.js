@@ -131,7 +131,7 @@ app.get('/chat', function(req, res) {
 });
 
 function loginCheck(req, res) {
-  if (typeof req.body.id === 'undefined'){
+  if (typeof req.user === 'undefined'){
     req.flash('danger','Please login or create a new account.')
     res.redirect('/');
   }
@@ -148,7 +148,7 @@ app.use('/messages', require('./controllers/messages.js'));
 //App Listen
 //new listen to allow socket.io to share the port
 server.listen(process.env.PORT || 3000);
-//app.listen(process.env.PORT || 3000);
+// app.listen(process.env.PORT || 3000);
 
 
 

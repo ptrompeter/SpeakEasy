@@ -40,7 +40,7 @@ router.post('/signup',function(req,res){
        req.flash('danger',err.message);
      }else{
        req.flash('danger','unknown error.');
-       console.log(err);
+      //  console.log(err);
      }
      res.redirect('/auth/signup');
    })
@@ -54,7 +54,7 @@ router.get('/login', function(req,res){
 // Logging In - creating session
 router.post('/login', function(req,res){
   passport.authenticate('local', function(error,user,info){
-    console.log(user);
+    // console.log(user);
     if(user){
       req.login(user,function(error){
         if(error) throw error;
