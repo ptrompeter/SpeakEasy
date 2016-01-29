@@ -5,7 +5,7 @@ var request = require('request');
 
 
 function loginCheck(req, res) {
-  if (typeof req.body.id === 'undefined'){
+  if (typeof req.user.id === 'undefined'){
     req.flash('danger','Please login or create a new account.')
     res.redirect('/');
   }
