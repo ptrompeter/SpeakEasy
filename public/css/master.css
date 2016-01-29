@@ -66,8 +66,11 @@ nav li {
   padding: 15px;
 }
 
-
-
+.alert {
+  width: 30%;
+  text-align: center;
+  margin: 0 auto;
+}
 
 
 
@@ -89,7 +92,7 @@ footer {
 
 footer ul {
   list-style-type: none;
-  float: right;
+  text-align: center;
 }
 /* --------------------------------------
    Header
@@ -98,6 +101,13 @@ header {
   background-color: #689BD2;
   height: 100px;
 
+}
+.mynav {
+  list-style: none;
+  margin-top: 5px;
+}
+.mynav li {
+  display: inline;
 }
 
 header #logo {
@@ -115,6 +125,10 @@ header #logo p {
   text-align: center;
   padding: 0;
   margin-top: 30%;
+}
+
+#logo img {
+  width: 100%;
 }
 
 header #login {
@@ -225,7 +239,6 @@ div#im a {
    Carousel
    -------------------------------------- */
 #myCarousel {
-   margin: 60px 0;
    max-width: 100%
 }
 
