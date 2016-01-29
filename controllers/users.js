@@ -12,7 +12,7 @@ var newPal;
 //Cheat functions
 
 function loginCheck(req, res) {
-  console.log(req);
+  // console.log(req);
   if (typeof req.user === 'undefined'){
   // if (!req.user.id){
     req.flash('danger','Please login or create a new account.')
