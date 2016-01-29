@@ -1,8 +1,11 @@
 <section id="new-message" class="messages">
+  <h1>New Message</h1>
   <form action="/messages/new" method="POST" role="form">
    <input type="hidden" class="form-control" name="user" value="<%= currentUser.id%>">
    <input type="text" class="form-control" name="pal" placeholder="Palname">
+    <br>
    <textarea type="text" class="form-control" name="text" maxlength="2000"></textarea>
-   <button class="btn btn-default" type="submit">Send</button>
+    <br>
+   <button type="submit">Send</button>
   </form>
 </section>

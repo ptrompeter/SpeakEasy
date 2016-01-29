@@ -64,7 +64,7 @@ db.user.find({where: {userName: req.body.pal}}).then(function(pal){
          palName: pal.userName
        }).then(function(message){
 
-         res.send(message);
+         res.redirect('/messages/sent');
        });
       });
    });
@@ -86,7 +86,7 @@ router.get('/sent', function(req,res){
 router.get('/received', function(req,res){
   loginCheck(req, res);
  db.message.findAll({ where: {palId: req.user.id}}).then(function(messages){
-   res.render('messages/received.ejs', {currentUser: res});
+   res.render('messages/received.ejs', {messages: messages});
  });
 });
 
