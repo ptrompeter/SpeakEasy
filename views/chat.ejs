@@ -1,6 +1,6 @@
-<h1 class="center">Chat Room!</h1>
+<h1 class="center"><%= currentUser.userName %>, SpeakEasy!</h1>
 
-<form action="./chat/api" method="POST" role="form" id="chatForm" >
+<form action="chat"  role="form" id="chatForm" >
 <!-- This Div will contain All the Chats -->
   <div id="chatsContainer"></div>
 
@@ -9,10 +9,10 @@
   <input type="text" id="username" value="<%= currentUser.userName %>">
   <br>
   <!-- This is were we write our message -->
-  <input type="text" id="myMsg" name='textBody' placeholder="Write your message...">
+  <input type="text" id="myMsg" name='' placeholder="Write your message...">
   <br>
   <!-- And this is our "Send Button" -->
-  <button id="sendBtn">Send</button>
+  <button type="button" id="sendBtn">Send</button>
   </div>
 </form>
 <p style="display:none;" id="to"><%= currentUser.language %></p>

@@ -21,56 +21,28 @@ var onceperday = false;
 
 
 
-//console.log('server before: ' +incomingMsg);
-// function ajaxCall() {
-// var apiKey = 'key='+process.env.SPEAKEASY_KEY+'&';
 
-// var from = 'en'; //source of language//
-// var to = 'iw'; //translating language//
-// var url = 'https://www.googleapis.com/language/translate/v2?q=';
-// var input; // grab text from new msg post and use it in query for api//
-// var translations;
-//api http request to googleapi//
-// request(url+input+'&source='+from+'&target='+to+'&'+apiKey, function (error, response, body) {
- //console.log("4 user: "+req.user.language+" pal: "+pal.language);
-//    if (!error && response.statusCode == 200) {
-//        var data =JSON.parse(body);
-//        console.log(data.data.translations[0]);
-//        incomingMsg = data.data.translations[0].translatedText;
-//        console.log(incomingMsg);
-//        io.emit('msg', incomingMsg);
-//
-//    }
-// });
-// };
 
-// Chat connection and Code (Socket)//
-// var rooms;
-// io.on('connection', function(socket) {
-//
-//     console.log('new connection made, id=' + socket.id);
-//     socket.on('room', function(room) {
-//           rooms = room;
-//           console.log('Connected to room: '+rooms);
-//           socket.join(rooms);
-//       });
-//
-//     socket.on('msg', function(incomingMsg) {
-//         io.to(rooms).emit('msg', incomingMsg);
-        // console.log("hello "+1);
-        // setTimeout(function(){
-        //   console.log(typeof incomingMsg);
-        //   console.log('server after: ' +incomingMsg);
-        //     ajaxCall();
-        //
-        // }, 500);
+// Chat connection and Code (Socket)
+var rooms;
+io.on('connection', function(socket) {
 
-//     });
-// });
+    console.log('new connection made, id=' + socket.id);
+    socket.on('room', function(room) {
+          rooms = room;
+          console.log('Connected to room: '+rooms);
+          socket.join(rooms);
+      });
+
+    socket.on('msg', function(incomingMsg) {
+        io.to(rooms).emit('msg', incomingMsg);
+
+    });
+});
 
 
 
-//console.log(rooms+ " out");
+
 app.set('view engine', 'ejs');
 app.use(ejsLayouts);
 app.use(bodyParser.urlencoded({extended: true}));
@@ -78,6 +50,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(cookieParser());
 
 //.uses for authentication
+// console.log(process.env.HASH)
 app.use(session({secret: process.env.HASH, resave: false, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -167,11 +140,11 @@ app.get('/users', function(req, res){
   });
 });
 
-//
-// app.get('/chat', function(req, res) {
-//   //console.log(req+" "+res);
-//   res.render('chat');
-// });
+
+app.get('/chat', function(req, res) {
+  //console.log(req+" "+res);
+  res.render('chat');
+});
 
 function loginCheck(req, res) {
   if (typeof req.user === 'undefined'){
@@ -182,7 +155,7 @@ function loginCheck(req, res) {
 
 
 // Controllers
-app.use('/chat', require('./controllers/chat.js'));
+//app.use('/chat', require('./controllers/chat.js'));
 app.use('/auth', require('./controllers/auth.js'));
 app.use('/users', require('./controllers/users.js'));
 // app.use('/users', require('./controllers/countries.js'));
