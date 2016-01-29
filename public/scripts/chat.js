@@ -1,6 +1,6 @@
 $(function(){
     var socket = io();
-    console.log(socket);
+    // console.log(socket);
     var decoratedHtml;
     var input;
     var interpetedText;
@@ -25,7 +25,7 @@ $(function(){
         }
     }
     language();
-    console.log(to);
+    // console.log(to);
     var translateText = function() {
       $.ajax({
         url: url+input+'&source='+from+'&target='+to+'&'+apiKey,
