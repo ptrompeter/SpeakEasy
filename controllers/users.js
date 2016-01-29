@@ -76,7 +76,7 @@ router.post('/pals', function(req, res){
     });
   } else {
     res.cookie('onceperday', 'some value', {expire : new Date() + (24 * 360000)});
-    console.log(req.cookie);
+    // console.log(req.cookie);
     db.user.update({
       matchWaiting: true,
       sentBy: req.user.userName},

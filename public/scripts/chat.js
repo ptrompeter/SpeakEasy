@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(window).load(function() {
   var socket = io();
   var decoratedHtml;
   var input;
@@ -55,24 +55,27 @@ $(document).ready(function() {
 
 
   $('#sendBtn').on('click', function(e) {
-      e.preventDefault();
-      var msg = $('#myMsg').val().trim();
+      //e.preventDefault();
+      var completeMsg = $('#myMsg').val().trim();
 
-      if(msg.length > 0) {
-          var userName = $('#username').val();
+      if(completeMsg.length > 0) {
+          //var userName = $('#username').val();
 
-          var completeMsg = userName + ': ' + msg;
-
+          //var completeMsg = userName + ': ' + msg;
+          console.log('cllient before: ' +completeMsg);
           socket.emit('msg', completeMsg);
       }
   });
 
   socket.on('msg', function(incomingMsg) {
-      bi = incomingMsg.indexOf(':');
-      $user = incomingMsg.slice(0, bi+1);
-      $msg = incomingMsg.slice(bi+1).trim();
-      input=encodeURIComponent($msg);
-      translateText();
+      // bi = incomingMsg.indexOf(':');
+      // $user = incomingMsg.slice(0, bi+1);
+      // $msg = incomingMsg.slice(bi+1).trim();
+      // input=encodeURIComponent($msg);
+      //translateText();
+      console.log('cllient after: ' +incomingMsg);
+      decoratedHtml = '<p class="msgfield">'+incomingMsg +'&nbsp;&nbsp;&nbsp;&nbsp;<small>'+d+'</small></p>';
+      $('#chatsContainer').append(decoratedHtml);
 
   });
 

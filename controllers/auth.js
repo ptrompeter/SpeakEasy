@@ -54,7 +54,7 @@ router.get('/login', function(req,res){
 // Logging In - creating session
 router.post('/login', function(req,res){
   passport.authenticate('local', function(error,user,info){
-    console.log(user);
+    // console.log(user);
     if(user){
       req.login(user,function(error){
         if(error) throw error;
