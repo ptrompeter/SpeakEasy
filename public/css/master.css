@@ -259,15 +259,15 @@ div#im a {
 #myCarousel .item { height: 400px;}
 
 #slide1 {
-   background: url('../../images/pic1.jpg') top center no-repeat;
+   background: url('../../images/sanfran.jpg') top center no-repeat;
 }
 
 #slide2 {
-   background: url('../../images/pic2.jpg') top center no-repeat;
+   background: url('../../images/tokyo.jpg') top center no-repeat;
 }
 
 #slide3 {
-   background: url('../../images/pic3.jpg') top center no-repeat;
+   background: url('../../images/paris.jpg') top center no-repeat;
 }
 
 /* Landscape phone to portrait tablet */
