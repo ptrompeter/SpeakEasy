@@ -25,7 +25,7 @@
   <header>
 
     <div class='row'>
-      <div id="logo"><img src="/images/logo.jpg"></div>
+      <div id="logo"><a href="/"><img src="/images/logo.png"></a></div>
       <ul class='mynav'>
         <li><a href='/'>HOME |</a></li>
         <li><a href='/about'>ABOUT | </a></li>
@@ -44,7 +44,7 @@
         <h3>Hello, <%= currentUser.userName %></h3>
           <% } %>
       <!-- <% if (!currentUser) { %> -->
-      <div>
+      <div id="headLogin">
         <form action="/auth/login" method="POST" role="form">
           <input type="text" name="username" placeholder="Username" />
           <input type="text" name="password" placeholder="Password" />
@@ -68,18 +68,18 @@
     <% } %>
     </div>
     <div class='row'>
-      <div class="body">
+      <div class='maincontent'>
             <%- body %>
       </div>
     </div>
   </div>
   <footer>
     <div class='row'>
-      <ul class='mynav'>
-        <li><a href="#">HOME</a></li>
-        <li><a href="#">ABOUT</a></li>
+      <ul class='footnav'>
+        <li><a href="/">HOME</a></li>
+        <li><a href="/about">ABOUT</a></li>
         <li><a href="#">CONTACT</a></li>
-        <li><a href="#">CREATE ACCOUNT</a></li>
+        <li><a href="/auth/signup">CREATE ACCOUNT</a></li>
       </ul>
     </div>
 

@@ -26,31 +26,19 @@
 |                     for a few purposes. Experimentation will help figure out where we will use this. |
 *******************************************************************************************************/
 
-/*////////////////LAYOUT/////////*/
-body {
-  /*font-family: 'Pontano Sans', sans-serif;*/
-  font-family: 'Actor', sans-serif;
-}
+
 /* --------------------------------------
-   Layout
-   -------------------------------------- */
-.body {
-  background: color: #EDF1F3;
-  padding: 5% 10%;
+Layout
+-------------------------------------- */
 
+html {
+ font-family: 'Actor', sans-serif;
+ overflow-x: hidden;
 }
 
-nav {
-    list-style-type: none;
-    background: #634B9E;
-    float: left;
-    margin-top: 20px;
-
-}
-
-nav li {
-  display: inline-block;
-  padding: 15px;
+.maincontent {
+ background-color: #EDF1F3;
+ padding: 5% 10%;
 }
 
 .alert {
@@ -59,67 +47,74 @@ nav li {
   margin: 0 auto;
 }
 
-
 button {
-  box-shadow: 1px 1px 5px;
-  margin: 15px 0;
+  box-shadow: 2px 2px 2px;
+  /*margin: 15px 0;*/
 }
 
 footer {
-
   background-color: #ABB7BE;
-  max-height: 100%;
+  height: 10px;
   padding: 5%;
   max-width: 100%;
   overflow: hidden;
-
 }
 
 footer ul {
   list-style-type: none;
   text-align: center;
 }
+
+footer li {
+  display: inline-block;
+}
+
 /* --------------------------------------
    Header
    -------------------------------------- */
-header {
-  background-color: #689BD2;
-  height: 100px;
 
+header {
+  background-color: #634B9E;
+  height: 100px;
 }
+
 .mynav {
   list-style: none;
-  margin-top: 5px;
+  padding-top: 30px;
 }
+
 .mynav li {
   display: inline;
 }
 
 header #logo {
-  height: 80px;
-  width: 80px;
+  height: 7%%;
+  width: 7%;
   overflow: hidden;
   line-height: 25px
   padding: 1px;
-  background-color: #47156C;
   float: left;
   margin: 10px 5px 0 10px;
 }
-header #logo p {
-  color: white;
-  text-align: center;
-  padding: 0;
-  margin-top: 30%;
-}
 
 #logo img {
-  width: 100%;
+  max-width: 100%;
 }
 
-header #login {
+header #headLogin {
   float: right;
-  margin: 25px 20px 0 0;
 }
+
+div#loginMobile {
+  display:none;
+}
+
+@media only screen and (max-width: 670px) {
+  .carousel-control {
+    background-image: image();
+  }
+}
+
 /* --------------------------------------
    Links
    -------------------------------------- */
@@ -127,6 +122,7 @@ header #login {
 footer a {
   color: #47156C;
 }
+
 a {
   color: #EDF1F3;
   text-decoration: none;
@@ -135,22 +131,6 @@ a {
 a:hover {
     color: #ABDFF8;
 }
-
-/* --------------------------------------
-   Home
-   -------------------------------------- */
-
-/*#home {
-  max-width:  100%;
-  padding: 0;
-  margin: 0;
-  background-color: #D2DDE1;
-}
-
-#home h1 {
-  font-size: 3em;
-}*/
-
 
 /* --------------------------------------
    Chat Room
@@ -216,16 +196,11 @@ a:hover {
    margin-bottom: 100px;
 }
 
-
 .carousel-caption {
    font-size: 24px;
 }
 
-.carousel-caption h4 {
-   font-size: 32px;
-}
-
-#myCarousel .item { height: 400px;}
+#myCarousel .item { height: 300px;}
 
 #slide1 {
    background: url('../../images/sanfran.jpg') top center no-repeat;
@@ -239,21 +214,22 @@ a:hover {
    background: url('../../images/paris.jpg') top center no-repeat;
 }
 
+
 /* Landscape phone to portrait tablet */
 @media (max-width: 768px) {
 
    #myCarousel .item { height: 310px;}
 
    #slide1 {
-      background: url('../../images/carousel_small_01.jpg') top center no-repeat;
+      background: url('../../images/sanfran.jpg') top center no-repeat;
    }
 
    #slide2 {
-      background: url('../../images/carousel_small_02.jpg') top center no-repeat;
+      background: url('../../images/tokyo.jpg') top center no-repeat;
    }
 
    #slide3 {
-      background: url('../../images/carousel_small_03.jpg') top center no-repeat;
+      background: url('../../paris.jpg') top center no-repeat;
    }
 
    .carousel-caption {
@@ -269,19 +245,75 @@ a:hover {
 /* Large desktop */
 @media (min-width: 1200px) {
 
-   #myCarousel .item { height: 500px;}
+   #myCarousel .item {
+     height: 400px;
+     max-width: 100%;
+   }
 
    #slide1 {
-      background: url('../../images/carousel_large_01.jpg') top center no-repeat;
+      background: url('../../images/sanfran.jpg') top center no-repeat;
    }
 
    #slide2 {
-      background: url('../../images/carousel_large_02.jpg') top center no-repeat;
+      background: url('../../images/tokyo.jpg') top center no-repeat;
    }
 
    #slide3 {
-      background: url('../../images/carousel_large_03.jpg') top center no-repeat;
+      background: url('../../paris.jpg') top center no-repeat;
    }
+
+
+/* Large desktop */
+@media only screen and (max-width: 680px) {
+
+
+ header {
+   padding-top: 10px;
+ }
+
+ header #logo {
+   height: 60px;
+   float: none;
+ }
+
+ #myCarousel {
+   display: none;
+ }
+
+  nav#nav {
+      list-style-type: none;
+      background: #634B9E;
+      float: left;
+      margin-top: 20px;
+      display: none;
+
+  }
+
+  nav li {
+    display: block;
+    padding: 15px;
+    margin-right: 680px;
+  }
+
+  footer ul{
+    float: none;
+  }
+
+  #hamMenu {
+    float: right;
+    display: inline;
+  }
+
+  #loginMobile form {
+    display: inline;
+    margin: 100px 0 150px 0;
+  }
+
+  #loginMobile input {
+    height: 30px;
+    width: 250px;
+    margin: 10px 0;
+  }
 
 }
 
@@ -299,7 +331,7 @@ a:hover {
   margin: 5%;
 }
 
-#loginMobile > form {
+#loginMobile form {
   display: none;
 }
 
