@@ -1,64 +1,54 @@
-$(function(){
-    var socket = io();
-    // console.log(socket);
-    var decoratedHtml;
-    var input;
-    var interpetedText;
-    var bi;
-    var $user;
-    var $msg;
 
+$(window).load(function() {
+  var socket = io();
+  var decoratedHtml;
+  var input;
+  var msg;
+  var room = 'abc123';
+  var userName = $('#username').val();
+  var date = new Date(Date.UTC(2013, 1, 1, 14, 0, 0));
+  var options = {
+      weekday: "long", year: "numeric", month: "short",
+      day: "numeric", hour: "2-digit", minute: "2-digit"
+  };
+// chat object
+  var chat = {}
 
-    var apiKey = 'key='+process.env.SPEAKEASY_KEY+'&';
-    console.log(apiKey);
-    var from = 'en';
-    var to = 'ar';
-    var url = 'https://www.googleapis.com/language/translate/v2?q=';
+// function to send messages to the server
+chat.sendMessage = function(e) {
 
-    var language = function() {
-        var answer = prompt("Pick a language Hebrew, Spanish, Arabic");
-        if(answer.toLowerCase() == 'hebrew') {
-            to = 'iw';
-        } else if(answer.toLowerCase() == 'spanish') {
-              to = 'es';
-        } else {
-            to = 'ar';
-        }
+  msg = $('#myMsg').val().trim();
+  if(msg.length > 0) {
+      var completeMsg = msg;
+      console.log(completeMsg);
+      socket.emit('msg', completeMsg);
     }
-    language();
-    // console.log(to);
-    var translateText = function() {
-      $.ajax({
-        url: url+input+'&source='+from+'&target='+to+'&'+apiKey,
-        type: 'GET',
-        //headers: { 'Authorization': 'token ' + githubToken },
-        success: function(data, message, xhr) {
-              interpetedText = data.data.translations[0].translatedText
-              decoratedHtml = '<p class="msgfield">'+ $user +' '+ interpetedText + '</p>';
-              $('#chatsContainer').append(decoratedHtml);
-        }
-      });
-    };
-
-    $('#sendBtn').on('click', function() {
-        var msg = $('#myMsg').val().trim();
-
-        if(msg.length > 0) {
-            var userName = $('#username').val();
-            var completeMsg = userName + ': ' + msg;
-
-            socket.emit('msg', completeMsg);
-        }
-    });
-
-    socket.on('msg', function(incomingMsg) {
-        bi = incomingMsg.indexOf(':');
-        $user = incomingMsg.slice(0, bi+1);
-        $msg = incomingMsg.slice(bi+1).trim();
-        input=encodeURIComponent($msg);
-        translateText();
-
-    });
+};
+// date and time stamp for messages
+chat.date = date.toLocaleTimeString("en-us", options);
 
 
+
+// when send btn is clicked sent to socket.io on server
+  $('#sendBtn').on('click', function(e) {
+        e.preventDefault()
+        chat.sendMessage();
+  });
+
+
+// when connection is made to socket.io they are joined to a room
+  socket.on('connect', function () {
+    socket.emit('room', room);
+  });
+
+// when a message is sent to the client from the server
+  socket.on('msg', function(incomingMsg) {
+      decoratedHtml = '<p class="msgfield"><b>'+userName + ':</b> '+ incomingMsg +'&nbsp;&nbsp;&nbsp;&nbsp;<small>'+chat.date+'</small></p>';
+      $('#chatsContainer').append(decoratedHtml);
+  });
+
+
+  $('#hamMenu').on('click', function() {
+      $('nav').slideToggle();
+   });
 });

@@ -1,3 +1,8 @@
+
+/* --------------------------------------
+   Layout
+   -------------------------------------- */
+
 /**********************************************STYLE GUIDE**********************************************
 |                                    Don't be afraid to experiment!                                    |
 |                                                                                                      |
@@ -26,14 +31,21 @@
 |                     for a few purposes. Experimentation will help figure out where we will use this. |
 *******************************************************************************************************/
 
-/*////////////////LAYOUT/////////*/
+div.im {
+  background-color: #EDF1F3;
+  width: 200px;
+  line-height: 50px;
+  border-radius: 5px;
+  color: #47156C;
+  margin: 15px 15px;
+
+}
+
 body {
   /*font-family: 'Pontano Sans', sans-serif;*/
   font-family: 'Actor', sans-serif;
 }
-/* --------------------------------------
-   Layout
-   -------------------------------------- */
+
 .body {
   background: color: #EDF1F3;
   padding: 5% 10%;
@@ -45,6 +57,7 @@ nav {
     background: #689BD2;
     float: left;
     margin-top: 20px;
+    display: inline;
 
 }
 
@@ -60,6 +73,7 @@ nav li {
 }
 
 
+
 button {
   box-shadow: 1px 1px 5px;
   margin: 15px 0;
@@ -72,6 +86,7 @@ footer {
   padding: 5%;
   max-width: 100%;
   overflow: hidden;
+  margin-top: 25px;
 
 }
 
@@ -120,6 +135,11 @@ header #login {
   float: right;
   margin: 25px 20px 0 0;
 }
+
+#hamMenu {
+  float: right;
+  display: none;
+}
 /* --------------------------------------
    Links
    -------------------------------------- */
@@ -140,6 +160,11 @@ a:hover {
    Home
    -------------------------------------- */
 
+
+   #loginMobile form {
+     display: none;
+   }
+
 /*#home {
   max-width:  100%;
   padding: 0;
@@ -155,6 +180,11 @@ a:hover {
 /* --------------------------------------
    Chat Room
    -------------------------------------- */
+
+div#im a {
+    font-size: 1.5em;
+    color: #47156C;
+}
 
 #chatsContainer {
   height: 300px;
@@ -214,6 +244,7 @@ a:hover {
 
 #myCarousel h1 {
    margin-bottom: 100px;
+   font-size: 70px;
 }
 
 
@@ -242,18 +273,19 @@ a:hover {
 /* Landscape phone to portrait tablet */
 @media (max-width: 768px) {
 
+
    #myCarousel .item { height: 310px;}
 
    #slide1 {
-      background: url('../../images/carousel_small_01.jpg') top center no-repeat;
+      background: url('../../images/pic1.jpg') top center no-repeat;
    }
 
    #slide2 {
-      background: url('../../images/carousel_small_02.jpg') top center no-repeat;
+      background: url('../../images/pic2.jpg') top center no-repeat;
    }
 
    #slide3 {
-      background: url('../../images/carousel_small_03.jpg') top center no-repeat;
+      background: url('../../pic3.jpg') top center no-repeat;
    }
 
    .carousel-caption {
@@ -266,23 +298,69 @@ a:hover {
 
 }
 
+@media only screen and (max-width: 890px) {
+    div#login form {
+      display: none;
+    }
+
+
+}
+
 /* Large desktop */
-@media (min-width: 1200px) {
+@media only screen and (max-width: 680px) {
+ #loginMobile form {
+    display: inline;
+  }
 
-   #myCarousel .item { height: 500px;}
+ header {
+   padding-top: 10px;
+ }
 
-   #slide1 {
-      background: url('../../images/carousel_large_01.jpg') top center no-repeat;
-   }
+ header #logo {
+   height: 60px;
+   float: none;
+ }
 
-   #slide2 {
-      background: url('../../images/carousel_large_02.jpg') top center no-repeat;
-   }
+ #myCarousel {
+   display: none;
+ }
 
-   #slide3 {
-      background: url('../../images/carousel_large_03.jpg') top center no-repeat;
-   }
+  nav#nav {
+      list-style-type: none;
+      background: #689BD2;
+      float: left;
+      margin-top: 20px;
+      display: none;
 
+  }
+
+  nav li {
+    display: block;
+    padding: 15px;
+    margin-right: 680px;
+  }
+
+  footer ul{
+    float: none;
+  }
+
+  #frontLoginBtn {
+    margin-top: 15px;
+  }
+
+  #hamMenu {
+    float: right;
+    display: inline;
+
+  }
+  #loginMobile form {
+    margin: 100px 0 150px 0;
+  }
+  #loginMobile input {
+    height: 30px;
+    width: 250px;
+    margin: 10px 0;
+  }
 }
 
 
@@ -290,6 +368,13 @@ a:hover {
    Misc.
    -------------------------------------- */
 
+#new-message {
+  margin: 70px 0 100px 0;
+}
+
+#new-message input {
+  margin: 10px 0;
+}
 .center {
   text-align: center;
 }

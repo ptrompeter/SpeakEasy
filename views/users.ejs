@@ -1,4 +1,5 @@
-<h1>Users page</h1>
+<h1 class="body">Users page</h1>
+
 <div class='myPals'>
   <% if (typeof myPals.length === 0) { %>
     <p>You have no Pals! Use the Pal Finder to get a random pal!</p>
@@ -54,7 +55,7 @@
     </table>
   <% } %>
 </div>
-<div class='filterPals'>
+<div class='filterPals center'>
   <section id='findnew'>
 
     <% if (typeof potentialpal !== 'undefined') { %>
@@ -110,4 +111,3 @@
     <% } %>
 
   </section>
-</div>

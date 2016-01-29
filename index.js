@@ -20,7 +20,10 @@ var cookieParser = require('cookie-parser');
 var onceperday = false;
 
 
-//Chat connection and Code (Socket)//
+
+
+
+// Chat connection and Code (Socket)
 var rooms;
 io.on('connection', function(socket) {
 
@@ -28,16 +31,18 @@ io.on('connection', function(socket) {
     socket.on('room', function(room) {
           rooms = room;
           console.log('Connected to room: '+rooms);
-          socket.join(room);
+          socket.join(rooms);
       });
 
     socket.on('msg', function(incomingMsg) {
         io.to(rooms).emit('msg', incomingMsg);
+
     });
 });
 
 
-console.log(rooms+ " out");
+
+
 app.set('view engine', 'ejs');
 app.use(ejsLayouts);
 app.use(bodyParser.urlencoded({extended: true}));
@@ -45,6 +50,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(cookieParser());
 
 //.uses for authentication
+// console.log(process.env.HASH)
 app.use(session({secret: process.env.HASH, resave: false, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -136,6 +142,7 @@ app.get('/users', function(req, res){
 
 
 app.get('/chat', function(req, res) {
+  //console.log(req+" "+res);
   res.render('chat');
 });
 
@@ -156,8 +163,8 @@ app.use('/messages', require('./controllers/messages.js'));
 
 //App Listen
 //new listen to allow socket.io to share the port
+
 server.listen(process.env.PORT || 3000);
-// app.listen(process.env.PORT || 3000);
 
 
 
