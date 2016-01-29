@@ -34,11 +34,11 @@ router.post('/new', function (req,res){
 db.user.find({where: {userName: req.body.pal}}).then(function(pal) {
 //Variables for googleapis//
   var apiKey = 'key='+process.env.SPEAKEASY_KEY+'&';
-  console.log(' ');
-  console.log(" ",'pal:', pal, " ");
-  console.log(' ');
-  console.log(req);
-  console.log(' ');
+  // console.log(' ');
+  // console.log(" ",'pal:', pal, " ");
+  // console.log(' ');
+  // console.log(req);
+  // console.log(' ');
   var from = req.user.language; //source of language//
   var to = pal.language; //translating language//
   var url = 'https://www.googleapis.com/language/translate/v2?q=';
