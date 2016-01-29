@@ -163,6 +163,8 @@ a:hover {
   line-height: 50px;
   border-radius: 5px;
 
+  margin: 15px 15px;
+
 }
 div#im a {
     font-size: 1.5em;
