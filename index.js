@@ -156,7 +156,7 @@ app.use('/messages', require('./controllers/messages.js'));
 
 //App Listen
 //new listen to allow socket.io to share the port
-app.listen(process.env.PORT || 3000);
+server.listen(process.env.PORT || 3000);
 // app.listen(process.env.PORT || 3000);
 
 
