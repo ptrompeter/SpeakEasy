@@ -31,39 +31,16 @@
 |                     for a few purposes. Experimentation will help figure out where we will use this. |
 *******************************************************************************************************/
 
-div.im {
-  background-color: #EDF1F3;
-  width: 200px;
-  line-height: 50px;
-  border-radius: 5px;
-  color: #47156C;
-  margin: 15px 15px;
-
-}
-
 body {
-  /*font-family: 'Pontano Sans', sans-serif;*/
   font-family: 'Actor', sans-serif;
 }
 
-.body {
-  background: color: #EDF1F3;
-  padding: 5% 10%;
-
-}
-
-nav {
-    list-style-type: none;
-    background: #689BD2;
-    float: left;
-    margin-top: 20px;
-    display: inline;
-
+.maincontent {
+  background-color: #EDF1F3;
 }
 
 nav li {
   display: inline-block;
-  padding: 15px;
 }
 
 .alert {
@@ -71,8 +48,6 @@ nav li {
   text-align: center;
   margin: 0 auto;
 }
-
-
 
 button {
   box-shadow: 1px 1px 5px;
@@ -98,7 +73,7 @@ footer ul {
    Header
    -------------------------------------- */
 header {
-  background-color: #689BD2;
+  background-color: #634B9E;
   height: 100px;
 
 }
@@ -252,11 +227,7 @@ div#im a {
    font-size: 24px;
 }
 
-.carousel-caption h4 {
-   font-size: 32px;
-}
-
-#myCarousel .item { height: 400px;}
+/*#myCarousel .item { height: 400px;}*/
 
 #slide1 {
    background: url('../../images/pic1.jpg') top center no-repeat;
@@ -327,7 +298,7 @@ div#im a {
 
   nav#nav {
       list-style-type: none;
-      background: #689BD2;
+      background: #634B9E;
       float: left;
       margin-top: 20px;
       display: none;
