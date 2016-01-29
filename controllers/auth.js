@@ -40,7 +40,7 @@ router.post('/signup',function(req,res){
        req.flash('danger',err.message);
      }else{
        req.flash('danger','unknown error.');
-       console.log(err);
+      //  console.log(err);
      }
      res.redirect('/auth/signup');
    })

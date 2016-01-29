@@ -5,7 +5,7 @@ var request = require('request');
 
 
 function loginCheck(req, res) {
-  if (typeof req.body.id === 'undefined'){
+  if (typeof req.user === 'undefined'){
     req.flash('danger','Please login or create a new account.')
     res.redirect('/');
   }
@@ -34,11 +34,11 @@ router.post('/new', function (req,res){
 db.user.find({where: {userName: req.body.pal}}).then(function(pal) {
 //Variables for googleapis//
   var apiKey = 'key='+process.env.SPEAKEASY_KEY+'&';
-  console.log(' ');
-  console.log(" ",'pal:', pal, " ");
-  console.log(' ');
-  console.log(req);
-  console.log(' ');
+  // console.log(' ');
+  // console.log(" ",'pal:', pal, " ");
+  // console.log(' ');
+  // console.log(req);
+  // console.log(' ');
   var from = req.user.language; //source of language//
   var to = pal.language; //translating language//
   var url = 'https://www.googleapis.com/language/translate/v2?q=';
@@ -46,7 +46,7 @@ db.user.find({where: {userName: req.body.pal}}).then(function(pal) {
   var translations;
 //api http request to googleapi//
  request(url+input+'&source='+from+'&target='+to+'&'+apiKey, function (error, response, body) {
-   console.log("4 user: "+req.user.language+" pal: "+pal.language);
+  //  console.log("4 user: "+req.user.language+" pal: "+pal.language);
      if (!error && response.statusCode == 200) {
          var data =JSON.parse(body);
          translations = data.data.translations[0].translatedText;

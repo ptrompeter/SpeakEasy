@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 $(window).load(function() {
   var socket = io();
   var decoratedHtml;
@@ -16,17 +17,31 @@ $(window).load(function() {
   var to = $('#to').text();
   var url = 'https://www.googleapis.com/language/translate/v2?q=';
 
-  var language = function() {
-      var answer = prompt("Pick a language Hebrew, Spanish, Arabic");
-      if(answer.toLowerCase() == 'hebrew') {
-          to = 'iw';
-      } else if(answer.toLowerCase() == 'spanish') {
-            to = 'es';
-      } else {
-          to = 'ar';
-      }
-  }
-  //language();
+    // console.log(to);
+    var translateText = function() {
+      $.ajax({
+        url: url+input+'&source='+from+'&target='+to+'&'+apiKey,
+        type: 'GET',
+        //headers: { 'Authorization': 'token ' + githubToken },
+        success: function(data, message, xhr) {
+              interpetedText = data.data.translations[0].translatedText
+              decoratedHtml = '<p class="msgfield">'+ $user +' '+ interpetedText + '</p>';
+              $('#chatsContainer').append(decoratedHtml);
+        }
+      });
+    };
+
+    $('#sendBtn').on('click', function() {
+        var msg = $('#myMsg').val().trim();
+
+        if(msg.length > 0) {
+            var userName = $('#username').val();
+            var completeMsg = userName + ': ' + msg;
+
+            socket.emit('msg', completeMsg);
+        }
+    });
+
 
 
   var date = new Date(Date.UTC(2013, 1, 1, 14, 0, 0));
@@ -53,19 +68,6 @@ $(window).load(function() {
     socket.emit('room', room);
   });
 
-
-  $('#sendBtn').on('click', function(e) {
-      //e.preventDefault();
-      var completeMsg = $('#myMsg').val().trim();
-
-      if(completeMsg.length > 0) {
-          //var userName = $('#username').val();
-
-          //var completeMsg = userName + ': ' + msg;
-          console.log('cllient before: ' +completeMsg);
-          socket.emit('msg', completeMsg);
-      }
-  });
 
   socket.on('msg', function(incomingMsg) {
       // bi = incomingMsg.indexOf(':');

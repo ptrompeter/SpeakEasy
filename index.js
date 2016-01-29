@@ -78,7 +78,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(cookieParser());
 
 //.uses for authentication
-app.use(session({secret: 'M4nym4ny411the53kr3tZ', resave: false, saveUninitialized: true}));
+app.use(session({secret: process.env.HASH, resave: false, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -146,16 +146,25 @@ app.get('/about', function(req,res){
 
 
 app.get('/users', function(req, res){
-  var currDay = getCookie(req.headers, 'onceperday');
-  onceperday =  (currDay !== '') ? true : false;
-  if (req.user.matchWaiting === true) {
-    db.user.findAll({ where: {userName: req.user.sentBy}})
-    .then(function(thePal){
-      res.render('users', {onceperday: onceperday, pending: true, newPal: thePal});
+  db.usersPals.findAll({ where: {userId: req.user.id}}).then(function(preMyPals){
+    db.user.findAll().then(function(pallist){
+      var myPals = compareArrays(pallist, preMyPals, 'excl');
+      console.log('');
+      console.log('My Pals List: ');
+      console.log(myPals);
+      console.log('');
+      var currDay = getCookie(req.headers, 'onceperday');
+      onceperday =  (currDay !== '') ? true : false;
+      if (req.user.matchWaiting === true) {
+        db.user.findAll({ where: {userName: req.user.sentBy}})
+        .then(function(newPal){
+          res.render('users', {onceperday: onceperday, myPals: myPals, pending: true, newPal: newPal});
+        });
+      } else {
+        res.render('users', {onceperday: onceperday, myPals: myPals});
+      }
     });
-  } else {
-    res.render('users', {onceperday: onceperday});
-  }
+  });
 });
 
 //
@@ -165,7 +174,7 @@ app.get('/users', function(req, res){
 // });
 
 function loginCheck(req, res) {
-  if (typeof req.body.id === 'undefined'){
+  if (typeof req.user === 'undefined'){
     req.flash('danger','Please login or create a new account.')
     res.redirect('/');
   }
@@ -181,15 +190,15 @@ app.use('/messages', require('./controllers/messages.js'));
 
 //App Listen
 //new listen to allow socket.io to share the port
-app.listen(process.env.PORT || 3000)
-server.listen(process.env.PORT || 9090);
-//app.listen(process.env.PORT || 3000);
+
+server.listen(process.env.PORT || 3000);
 
 
 
 console.log("Server running on port 3000...");
 
 
+//Resourceful Functions
 
 function getCookie(reqHead, cooky) {
     if (reqHead.cookie.length > 0) {
@@ -204,4 +213,33 @@ function getCookie(reqHead, cooky) {
       }
     }
     return "";
+}
+
+var compareArrays = function(usersarray, palsarray, whatToReturn){
+  var excl = [];
+  var incl = [];
+  var temp = palsarray.map(function(Pele, Pindex, Parray){
+    var temp2 = usersarray.map(function(Aele, Aindex, Aarray){
+      if (Pele.palId !== Aele.id) {
+        if (typeof excl[0] === 'undefined') {
+          if (incl.indexOf(Aele) === -1){
+            incl.push(Aele);
+          }
+        } else {
+          var exclmap = excl.map(function(Eele, Eindex, Earray){
+            if (Eele.id !== Aele.id) {
+              if (incl.indexOf(Aele) === -1){
+                incl.push(Aele);
+              }
+            }
+          });
+        }
+      } else {
+        excl.push(Aele);
+      }
+    });
+  });
+  if (whatToReturn === 'incl'){
+    return incl;
+  } else { return excl; }
 }

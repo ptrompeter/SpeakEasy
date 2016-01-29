@@ -1,0 +1,36 @@
+<% myPals.forEach(function(onepal){ %>
+  <tr>
+    <% if (typeof onepal.userName !== 'undefined') { %>
+      <td><%= onepal.userName %></td>
+    <% } else { %> <td></td> <% } %>
+
+    <% if (typeof onepal.firstName !== 'undefined') { %>
+      <td><%= onepal.firstName %></td>
+    <% } else { %> <td></td> <% } %>
+
+    <% if (typeof onepal.lastName !== 'undefined') { %>
+      <td><%= onepal.lastName %></td>
+    <% } else { %> <td></td> <% } %>
+
+    <% if (typeof onepal.language !== 'undefined') { %>
+      <td><%= onepal.language %></td>
+    <% } else { %> <td></td> <% } %>
+
+    <% if (typeof onepal.nationality !== 'undefined') { %>
+      <td><%= onepal.nationality %></td>
+    <% } else { %> <td></td> <% } %>
+
+    <% if (typeof onepal.gender !== 'undefined') { %>
+      <td><%= onepal.gender %></td>
+    <% } else { %> <td></td> <% } %>
+
+    <% if (typeof onepal.birthday !== 'undefined') { %>
+      <td><script>Math.floor((new Date() - new Date('<%= onepal.birthday %>')) / 1000 / 60 / 60 / 24 / 365)</script></td>
+    <% } else { %> <td></td> <% } %>
+
+    <% if (typeof onepal.email !== 'undefined') { %>
+      <td><%= onepal.email %></td>
+    <% } else { %> <td></td> <% } %>
+    <td><div>X</div><div>O</div><div>Y</div></td>
+  </tr>
+<% }) %>

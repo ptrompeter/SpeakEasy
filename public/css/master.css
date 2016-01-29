@@ -294,3 +294,14 @@ a:hover {
   font-family: 'Rokkitt', serif;
   font-size: 1rem;
 }
+
+/*/////////Table-Rows-Data//////*/
+table {
+  border: 1px solid black;
+  margin-left: 3%;
+  text-align: center;
+}
+
+td {
+  border: 1px solid black;
+}

@@ -1,6 +1,5 @@
 <section id='settings'>
   <h4>Adding additional information about yourself is optional, but it improves the likelihood that you'll be selected as someone's new pal</h4>
-  <script src='../scripts/countries.js'></script>
   <form id='userinfo' action="/users/settings" method="POST" role="form">
     <div>
     </div>
@@ -11,24 +10,30 @@
       Last name: <input type='text' id='lastname' class='form-control' name='lastname' value="<%= currentUser.lastName%>"/>
     </div>
     <div>
-      Language: <input type='text' id='language' class='form-control' name='language' value="<%= currentUser.language%>"/>
+      Language: <select id='language' class='form-control' name='language'></select>
     </div>
     <div>
-      Nationality: <select type='text' id='nationality' class='form-control' name='nationality' value="<%= currentUser.nationality%>">
+      Nationality: <select id='nationality' class='form-control' name='nationality' value="<%= currentUser.nationality%>">
         <option value='null' selected> -no selection- </option>
       </select>
     </div>
     <div>
-      Gender: <input type='text' id='gender' class='form-control' name='gender' value="<%= currentUser.gender%>"/>
+      Gender: <select id='gender' class='form-control' name='gender' value="<%= currentUser.gender%>">
+        <option value='null' selected> -no selection- </option>
+        <option value='1'> Male </option>
+        <option value='2'> Female </option>
+      </select>
     </div>
     <div>
-      Birthday: <input type='text' id='birthday' class='form-control' name='birthday' value="<%= currentUser.birthday%>"/>
+      <!-- Birthday: <input type='text' id='birthday' class='form-control' name='birthday' value="<%= currentUser.birthday%>"/> -->
     </div>
     <div>
-      Are you available to be someone's new pal? <input type='text' id='newpal' class='form-control' name='newpal' value="<%= currentUser.palRecipient%>"/>
+      Would you like to be someone's pal?: <input type='checkbox' id='palRecipient' class='form-control' name='palRecipient' checked>
     </div>
     <div>
       <button type='submit'>Submit!</button>
     </div>
   </form>
 </section>
+<script src='../scripts/countries.js'></script>
+<script src='../scripts/languages.js'></script>
