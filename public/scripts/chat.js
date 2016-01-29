@@ -10,6 +10,7 @@ $(function(){
 
 
     var apiKey = 'key='+process.env.SPEAKEASY_KEY+'&';
+    console.log(apiKey);
     var from = 'en';
     var to = 'ar';
     var url = 'https://www.googleapis.com/language/translate/v2?q=';

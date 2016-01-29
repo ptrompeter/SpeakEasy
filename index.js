@@ -45,7 +45,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(cookieParser());
 
 //.uses for authentication
-app.use(session({secret: 'M4nym4ny411the53kr3tZ', resave: false, saveUninitialized: true}));
+app.use(session({secret: process.env.HASH, resave: false, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
