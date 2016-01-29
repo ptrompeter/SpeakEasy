@@ -37,6 +37,7 @@ body {
 
 .maincontent {
   background-color: #EDF1F3;
+  padding: 5% 10%;
 }
 
 nav li {
@@ -91,7 +92,6 @@ header #logo {
   overflow: hidden;
   line-height: 25px
   padding: 1px;
-  background-color: #47156C;
   float: left;
   margin: 10px 5px 0 10px;
 }
@@ -222,12 +222,11 @@ div#im a {
    font-size: 70px;
 }
 
-
 .carousel-caption {
    font-size: 24px;
 }
 
-/*#myCarousel .item { height: 400px;}*/
+#myCarousel .item { height: 400px;}
 
 #slide1 {
    background: url('../../images/sanfran.jpg') top center no-repeat;
@@ -248,15 +247,15 @@ div#im a {
    #myCarousel .item { height: 310px;}
 
    #slide1 {
-      background: url('../../images/pic1.jpg') top center no-repeat;
+      background: url('../../images/sanfran.jpg') top center no-repeat;
    }
 
    #slide2 {
-      background: url('../../images/pic2.jpg') top center no-repeat;
+      background: url('../../images/tokyo.jpg') top center no-repeat;
    }
 
    #slide3 {
-      background: url('../../pic3.jpg') top center no-repeat;
+      background: url('../../paris.jpg') top center no-repeat;
    }
 
    .carousel-caption {
