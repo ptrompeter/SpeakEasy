@@ -62,8 +62,8 @@ router.post('/login', function(req,res){
         res.redirect('/')
       });
     } else {
-      req.flash('Error', 'Sorry, please try again.');
-      res.redirect('/auth/login');
+      req.flash('Error', 'Sorry, login failed. If you are a new user, please create an account.');
+      res.redirect('/auth/signup');
     }
   })(req,res);
 });
