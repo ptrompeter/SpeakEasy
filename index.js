@@ -121,20 +121,16 @@ app.get('/about', function(req,res){
 app.get('/users', function(req, res){
   db.usersPals.findAll({ where: {userId: req.user.id}}).then(function(preMyPals){
     db.user.findAll().then(function(pallist){
-      var myPals = compareArrays(pallist, preMyPals, 'excl');
-      console.log('');
-      console.log('My Pals List: ');
-      console.log(myPals);
-      console.log('');
+      // var myPals = compareArrays(pallist, preMyPals, 'excl');
       var currDay = getCookie(req.headers, 'onceperday');
       onceperday =  (currDay !== '') ? true : false;
       if (req.user.matchWaiting === true) {
         db.user.findAll({ where: {userName: req.user.sentBy}})
         .then(function(newPal){
-          res.render('users', {onceperday: onceperday, myPals: myPals, pending: true, newPal: newPal});
+          res.render('users', {onceperday: onceperday, pending: true, newPal: newPal});
         });
       } else {
-        res.render('users', {onceperday: onceperday, myPals: myPals});
+        res.render('users', {onceperday: onceperday});
       }
     });
   });

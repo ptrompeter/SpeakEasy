@@ -30,7 +30,7 @@ router.post('/signup',function(req,res){
        req.login(user,function(error){
          if(error) throw error;
        });
-       res.redirect('/');
+       res.redirect('/users/settings');
      }else{
        req.flash('danger','A user with that username already exists.');
        res.redirect('/auth/signup');
@@ -59,7 +59,7 @@ router.post('/login', function(req,res){
       req.login(user,function(error){
         if(error) throw error;
         req.flash('Sucess', 'You are now logged in.');
-        res.redirect('/')
+        res.redirect('/users/')
       });
     } else {
       req.flash('Error', 'Sorry, login failed. If you are a new user, please create an account.');

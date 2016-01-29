@@ -40,6 +40,10 @@ body {
 
 }
 
+.maincontent a {
+  color: #47156C
+}
+
 nav {
     list-style-type: none;
     background: #634B9E;
