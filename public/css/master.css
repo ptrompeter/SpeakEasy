@@ -41,6 +41,9 @@ html {
  padding: 5% 10%;
 }
 
+.maincontent a {
+  color: #47156C
+}
 .alert {
   width: 30%;
   text-align: center;

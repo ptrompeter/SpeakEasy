@@ -1,39 +1,36 @@
-<section id='settings'>
-  <h4>Adding additional information about yourself is optional, but it improves the likelihood that you'll be selected as someone's new pal</h4>
-  <form id='userinfo' action="/users/settings" method="POST" role="form">
-    <div>
-    </div>
-    <div>
-      First name: <input type='text' id='firstname' class='form-control' name='firstname' value="<%= currentUser.firstName%>"/>
-    </div>
-    <div>
-      Last name: <input type='text' id='lastname' class='form-control' name='lastname' value="<%= currentUser.lastName%>"/>
-    </div>
-    <div>
-      Language: <select id='language' class='form-control' name='language'></select>
-    </div>
-    <div>
-      Nationality: <select id='nationality' class='form-control' name='nationality' value="<%= currentUser.nationality%>">
-        <option value='null' selected> -no selection- </option>
-      </select>
-    </div>
-    <div>
-      Gender: <select id='gender' class='form-control' name='gender' value="<%= currentUser.gender%>">
-        <option value='null' selected> -no selection- </option>
-        <option value='1'> Male </option>
-        <option value='2'> Female </option>
-      </select>
-    </div>
-    <div>
-      <!-- Birthday: <input type='text' id='birthday' class='form-control' name='birthday' value="<%= currentUser.birthday%>"/> -->
-    </div>
-    <div>
-      Would you like to be someone's pal?: <input type='checkbox' id='palRecipient' class='form-control' name='palRecipient' checked>
-    </div>
-    <div>
-      <button type='submit'>Submit!</button>
-    </div>
-  </form>
+<section id='settings' class='container'>
+  <div class='row'>
+    <form id='userinfo' action="/users/settings" method="POST" role="form" class="col-xs-6">
+      <div>
+        First name: <input type='text' id='firstname' class='form-control' name='firstname' value="<%= currentUser.firstName%>"/>
+      </div>
+      <div>
+        Last name: <input type='text' id='lastname' class='form-control' name='lastname' value="<%= currentUser.lastName%>"/>
+      </div>
+      <div>
+        Language: <select id='language' class='form-control' name='language'></select>
+      </div>
+      <div>
+        Nationality: <select id='nationality' class='form-control' name='nationality' value="<%= currentUser.nationality%>">
+          <option value='null' selected> -no selection- </option>
+        </select>
+      </div>
+      <div>
+        Gender: <select id='gender' class='form-control' name='gender' value="<%= currentUser.gender%>">
+          <option value='null' selected> -no selection- </option>
+          <option value='1'> Male </option>
+          <option value='2'> Female </option>
+        </select>
+      </div>
+      <div>
+        Would you like to be someone's pal?: <input type='checkbox' id='palRecipient' class='form-control' name='palRecipient' checked>
+      </div>
+      <div>
+        <button type='submit'>Submit!</button>
+      </div>
+    </form>
+    <h4 class='h5 col-xs-6' id="usrsetinstruct">Adding additional information about yourself is optional, but it improves the likelihood that you'll be selected as someone's new pal.</h4>
+  </div>
 </section>
 <script src='../scripts/countries.js'></script>
 <script src='../scripts/languages.js'></script>

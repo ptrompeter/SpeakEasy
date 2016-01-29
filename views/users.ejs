@@ -1,60 +1,10 @@
 <h1 class="body">Users page</h1>
+<a href="/chat">live chat</a>
+<a href="/messages/sent">sent messages</a>
+<a href="/messages/received">received messages</a>
+<a href="/users/settings">settings</a>
+<a href="/messages/new">Send a message!</a>
 
-<div class='myPals'>
-  <% if (typeof myPals.length === 0) { %>
-    <p>You have no Pals! Use the Pal Finder to get a random pal!</p>
-  <% } else { %>
-    <table>
-      <tr>
-        <td>Username</td>
-        <td>First Name</td>
-        <td>Last Name</td>
-        <td>Language</td>
-        <td>Nationality</td>
-        <td>Gender</td>
-        <td>Age</td>
-        <td>Email</td>
-        <td>Options</td>
-      </tr>
-      <% myPals.forEach(function(onepal){ %>
-        <tr>
-          <% if (typeof onepal.userName !== 'undefined') { %>
-            <td><%= onepal.userName %></td>
-          <% } else { %> <td class='missing'>No info</td> <% } %>
-
-          <% if (typeof onepal.firstName !== 'undefined') { %>
-            <td><%= onepal.firstName %></td>
-          <% } else { %> <td class='missing'>No info</td> <% } %>
-
-          <% if (typeof onepal.lastName !== 'undefined') { %>
-            <td><%= onepal.lastName %></td>
-          <% } else { %> <td class='missing'>No info</td> <% } %>
-
-          <% if (typeof onepal.language !== 'undefined') { %>
-            <td><%= onepal.language %></td>
-          <% } else { %> <td class='missing'>No info</td> <% } %>
-
-          <% if (typeof onepal.nationality !== 'undefined') { %>
-            <td><%= onepal.nationality %></td>
-          <% } else { %> <td class='missing'>No info</td> <% } %>
-
-          <% if (typeof onepal.gender !== 'undefined') { %>
-            <td><%= onepal.gender %></td>
-          <% } else { %> <td class='missing'>No info</td> <% } %>
-
-          <% if (typeof onepal.birthday !== 'undefined') { %>
-            <td><script>Math.floor((new Date() - new Date('<%= onepal.birthday %>')) / 1000 / 60 / 60 / 24 / 365)</script></td>
-          <% } else { %> <td class='missing'>No info</td> <% } %>
-
-          <% if (typeof onepal.email !== 'undefined') { %>
-            <td><%= onepal.email %></td>
-          <% } else { %> <td class='missing'>No info</td> <% } %>
-          <td><div>Delete</div><div>Instant Chat</div><div>Message</div></td>
-        </tr>
-      <% }) %>
-    </table>
-  <% } %>
-</div>
 <div class='filterPals center'>
   <section id='findnew'>
 

@@ -8,7 +8,7 @@ var sendORcanc;
 var empty;
 var pending;
 var newPal;
-var myPals;
+// var myPals;
 
 //Cheat functions
 
@@ -36,13 +36,13 @@ router.get('/pals', function(req, res){
       } else {
         var incl = compareArrays(users, pals, 'incl');
         if (incl.length===0){
-          myPals = pals;
-          res.render('users.ejs', {empty: true, pending: pending, newPal: newPal, accORrej: accORrej, myPals: myPals});
+
+          res.render('users.ejs', {empty: true, pending: pending, newPal: newPal, accORrej: accORrej});
         } else {
           randNum = Math.floor(Math.random()*incl.length);
           potentialpal = incl;
-          myPals = pals;
-          res.render('users.ejs', {potentialpal: incl, randNum: randNum, myPals: myPals});
+          // myPals = pals;
+          res.render('users.ejs', {potentialpal: incl, randNum: randNum});
         }
       }
     });
@@ -51,12 +51,12 @@ router.get('/pals', function(req, res){
 
 router.post('/pals', function(req, res){
   if (req.body.palbutton==='NO'){
-    res.render('users.ejs', {sendORcanc: req.body.palbutton, potentialpal: potentialpal, myPals: myPals});
+    res.render('users.ejs', {sendORcanc: req.body.palbutton, potentialpal: potentialpal});
   } else {
     res.cookie('onceperday', 'some value', {expire : new Date() + (24 * 360000)});
     db.user.update({matchWaiting: true, sentBy: req.user.userName}, {where: {userName: req.body.pal}})
     .then(function(user){
-      res.render('users.ejs', {sendORcanc: req.body.palbutton, potentialpal: potentialpal, myPals: myPals});
+      res.render('users.ejs', {sendORcanc: req.body.palbutton, potentialpal: potentialpal});
     });
   }
 });
@@ -67,7 +67,7 @@ router.post('/addpal', function(req, res){
     {where: {userName: req.user.userName}}
   ).then(function(value){
     if (req.body.palbutton==='NO'){
-      res.render('users.ejs', {pending: req.user.matchWaiting, accORrej: req.body.palbutton, myPals: myPals});
+      res.render('users.ejs', {pending: req.user.matchWaiting, accORrej: req.body.palbutton});
     } else {
       db.user.find({where: {userName: req.user.sentBy}}).then(function(pal){
         db.usersPals.create({
@@ -78,7 +78,8 @@ router.post('/addpal', function(req, res){
             userId: pal.id,
             palId: req.user.id
           }).then(function(value){
-            res.render('users.ejs', {myPals: myPals, pending: req.user.matchWaiting, accORrej: req.body.palbutton, palName: pal.userName});
+            // res.render('users.ejs', {myPals: myPals, pending: req.user.matchWaiting, accORrej: req.body.palbutton, palName: pal.userName});
+            res.render('users.ejs', {pending: req.user.matchWaiting, accORrej: req.body.palbutton, palName: pal.userName});
           });
         });
       });
