@@ -4,11 +4,7 @@ $(window).load(function() {
   var decoratedHtml;
   var input;
   var room = 'abc123';
-  var date = new Date(Date.UTC(2013, 1, 1, 14, 0, 0));
-  var options = {
-      weekday: "long", year: "numeric", month: "short",
-      day: "numeric", hour: "2-digit", minute: "2-digit"
-  };
+  
 // chat object
   var chat = {}
 
@@ -22,7 +18,7 @@ chat.sendMessage = function(e) {
   }
 };
 // date and time stamp for messages
-chat.date = date.toLocaleTimeString("en-us", options);
+chat.date = new Date().toString().slice(0,24);
 
 
 
@@ -40,7 +36,8 @@ chat.date = date.toLocaleTimeString("en-us", options);
 
 // when a message is sent to the client from the server
   socket.on('msg', function(incomingMsg) {
-    decoratedHtml = '<p class="msgfield">'+incomingMsg+ '</p>';
+    decoratedHtml = '<p class="msgfield">'+incomingMsg+' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>'+chat.date+'</i></p>';
     $('#chatsContainer').append(decoratedHtml);
   });
-});
+
+});   //end closure
